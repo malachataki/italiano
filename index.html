@@ -2,9 +2,8 @@
 <html lang="el">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>Ιταλικό Λεξιλόγιο</title>
-  <meta name="description" content="Εξάσκηση ιταλικού λεξιλογίου με ελληνική μετάφραση" />
   <link rel="manifest" href="manifest.json" />
   <meta name="theme-color" content="#533fb7" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -20,7 +19,8 @@
       --accent: #533fb7; --accent-light: #eeedfe;
       --green-bg: #e1f5ee; --green-text: #085041; --green-border: #1D9E75;
       --red-bg: #fcebeb; --red-text: #501313; --red-border: #e24b4a;
-      --radius: 8px; --radius-lg: 12px;
+      --radius: 10px; --radius-lg: 14px;
+      --tap: 48px;
     }
     @media (prefers-color-scheme: dark) {
       :root {
@@ -32,82 +32,174 @@
         --red-bg: #501313; --red-text: #f7c1c1;
       }
     }
-    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg2); color: var(--text); min-height: 100vh; }
 
-    header { background: var(--bg); border-bottom: 0.5px solid var(--border2); padding: 12px 16px; position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-    header h1 { font-size: 16px; font-weight: 600; white-space: nowrap; }
-    .score-pills { display: flex; gap: 6px; flex-shrink: 0; }
-    .pill { font-size: 12px; padding: 3px 10px; border-radius: 999px; border: 0.5px solid var(--border2); color: var(--text2); background: var(--bg2); white-space: nowrap; }
-    .pill b { color: var(--text); }
+    html { font-size: 16px; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg2); color: var(--text);
+      min-height: 100vh; min-height: 100dvh;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    /* HEADER */
+    header {
+      background: var(--bg); border-bottom: 0.5px solid var(--border2);
+      padding: 14px 16px; position: sticky; top: 0; z-index: 20;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    }
+    header h1 { font-size: 17px; font-weight: 700; }
+    .score-pills { display: flex; gap: 6px; }
+    .pill {
+      font-size: 13px; padding: 4px 12px; border-radius: 999px;
+      border: 0.5px solid var(--border2); color: var(--text2); background: var(--bg2);
+    }
+    .pill b { color: var(--text); font-weight: 700; }
     .pill.green { background: var(--green-bg); color: var(--green-text); border-color: var(--green-border); }
     .pill.red { background: var(--red-bg); color: var(--red-text); border-color: var(--red-border); }
 
+    /* TABS */
     .tabs { display: flex; background: var(--bg); border-bottom: 0.5px solid var(--border2); }
-    .tab-btn { flex: 1; padding: 10px 0; font-size: 13px; font-weight: 500; border: none; background: none; color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; }
+    .tab-btn {
+      flex: 1; padding: 13px 0; font-size: 14px; font-weight: 500;
+      border: none; background: none; color: var(--text2); cursor: pointer;
+      border-bottom: 2.5px solid transparent; min-height: var(--tap);
+    }
     .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-    .toolbar { background: var(--bg); border-bottom: 0.5px solid var(--border); padding: 8px 12px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-    .toolbar-btn { font-size: 12px; padding: 5px 12px; border-radius: 999px; border: 0.5px solid var(--border2); background: var(--bg2); color: var(--text2); cursor: pointer; white-space: nowrap; }
-    .toolbar-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    /* TOOLBAR */
+    .toolbar {
+      background: var(--bg); border-bottom: 0.5px solid var(--border);
+      padding: 10px 12px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+    }
+    .dir-btn {
+      font-size: 14px; padding: 8px 16px; border-radius: 999px;
+      border: 0.5px solid var(--border2); background: var(--bg2);
+      color: var(--text2); cursor: pointer; min-height: var(--tap);
+      display: flex; align-items: center;
+    }
+    .dir-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
     .toolbar-sep { flex: 1; }
-    .btn-reset { font-size: 12px; padding: 5px 12px; border-radius: 999px; border: 0.5px solid var(--red-border); color: var(--red-border); background: none; cursor: pointer; white-space: nowrap; }
+    .btn-reset {
+      font-size: 13px; padding: 8px 14px; border-radius: 999px;
+      border: 0.5px solid var(--red-border); color: var(--red-border);
+      background: none; cursor: pointer; min-height: var(--tap);
+      display: flex; align-items: center;
+    }
 
-    .cat-filter { background: var(--bg); border-bottom: 0.5px solid var(--border); padding: 8px 12px; display: flex; gap: 6px; flex-wrap: wrap; }
-    .cat-btn { font-size: 12px; padding: 4px 12px; border-radius: 999px; border: 0.5px solid var(--border); background: var(--bg2); color: var(--text2); cursor: pointer; white-space: nowrap; }
+    /* CAT FILTER */
+    .cat-filter {
+      background: var(--bg); border-bottom: 0.5px solid var(--border);
+      padding: 10px 12px; display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .cat-btn {
+      font-size: 13px; padding: 7px 14px; border-radius: 999px;
+      border: 0.5px solid var(--border); background: var(--bg2);
+      color: var(--text2); cursor: pointer; min-height: 36px;
+    }
     .cat-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
     .page { display: none; }
     .page.active { display: block; }
 
-    .table-wrap { overflow-x: auto; }
-    table.quiz-tbl { width: 100%; border-collapse: collapse; font-size: 14px; }
-    table.quiz-tbl th { background: var(--bg); position: sticky; top: 0; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .4px; color: var(--text2); padding: 8px 10px; border-bottom: 1px solid var(--border2); text-align: left; z-index: 5; }
-    table.quiz-tbl td { padding: 3px 6px; border-bottom: 0.5px solid var(--border); vertical-align: middle; }
-    table.quiz-tbl tr:hover td { background: var(--bg3); }
-    .cat-sep td { background: var(--bg3) !important; font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: .6px; padding: 6px 10px; border-bottom: 1px solid var(--border2); }
-    .it-word { font-weight: 500; color: var(--text); padding: 5px 10px; }
+    /* QUIZ TABLE — mobile optimized */
+    .table-wrap { overflow-x: hidden; width: 100%; }
+    table.quiz-tbl { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    table.quiz-tbl col.c-num  { width: 36px; }
+    table.quiz-tbl col.c-word { width: 38%; }
+    table.quiz-tbl col.c-ans  { width: auto; }
+    table.quiz-tbl col.c-chk  { width: 32px; }
+
+    table.quiz-tbl th {
+      background: var(--bg); font-size: 12px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .4px; color: var(--text2);
+      padding: 9px 8px; border-bottom: 1px solid var(--border2); text-align: left;
+      position: sticky; top: 0; z-index: 5;
+    }
+    table.quiz-tbl td { padding: 3px 4px; border-bottom: 0.5px solid var(--border); vertical-align: middle; }
+
+    .cat-sep td {
+      background: var(--bg3) !important; font-size: 11px; font-weight: 700;
+      color: var(--accent); text-transform: uppercase; letter-spacing: .6px;
+      padding: 7px 8px; border-bottom: 1px solid var(--border2);
+    }
+
+    .it-word {
+      font-size: 15px; font-weight: 500; color: var(--text);
+      padding: 6px 6px 6px 8px; line-height: 1.3;
+      word-break: break-word;
+    }
+    .row-num { font-size: 11px; color: var(--text2); text-align: center; }
+
     .answer-inp {
-      width: 100%; font-size: 14px; padding: 5px 8px;
+      width: 100%; font-size: 16px; padding: 8px 8px;
       border: 1px solid transparent; border-radius: var(--radius);
       background: transparent; color: var(--text); outline: none;
+      min-height: var(--tap); -webkit-appearance: none;
     }
     .answer-inp:focus { border-color: var(--accent); background: var(--bg); }
     .answer-inp.correct { background: var(--green-bg); color: var(--green-text); border-color: var(--green-border); }
-    .answer-inp.wrong { background: var(--red-bg); color: var(--red-text); border-color: var(--red-border); }
-    .check-cell { width: 30px; text-align: center; font-size: 15px; }
-    .row-num { width: 30px; font-size: 11px; color: var(--text2); text-align: center; }
+    .answer-inp.wrong   { background: var(--red-bg);   color: var(--red-text);   border-color: var(--red-border); }
 
-    .bottom-bar { position: sticky; bottom: 0; background: var(--bg); border-top: 0.5px solid var(--border2); padding: 10px 16px; display: flex; gap: 10px; align-items: center; justify-content: space-between; }
-    .btn-check-all { flex: 1; padding: 10px; font-size: 14px; font-weight: 600; background: var(--accent); color: #fff; border: none; border-radius: var(--radius); cursor: pointer; }
-    .btn-check-all:active { opacity: .85; }
+    .check-cell { text-align: center; font-size: 17px; }
 
-    .vocab-search { padding: 10px 12px; background: var(--bg); border-bottom: 0.5px solid var(--border); }
-    .vocab-search input { width: 100%; font-size: 14px; padding: 8px 12px; border: 1px solid var(--border2); border-radius: var(--radius); background: var(--bg2); color: var(--text); outline: none; }
+    /* BOTTOM BAR */
+    .bottom-bar {
+      position: sticky; bottom: 0; background: var(--bg);
+      border-top: 0.5px solid var(--border2);
+      padding: 12px 16px; padding-bottom: max(12px, env(safe-area-inset-bottom));
+      display: flex; gap: 10px; align-items: center;
+    }
+    .bottom-info { font-size: 13px; color: var(--text2); flex: 1; }
+    .btn-check-all {
+      padding: 12px 24px; font-size: 15px; font-weight: 700;
+      background: var(--accent); color: #fff; border: none;
+      border-radius: var(--radius); cursor: pointer; min-height: var(--tap);
+      flex-shrink: 0;
+    }
+
+    /* VOCAB PAGE */
+    .vocab-search { padding: 12px; background: var(--bg); border-bottom: 0.5px solid var(--border); }
+    .vocab-search input {
+      width: 100%; font-size: 16px; padding: 10px 14px;
+      border: 1px solid var(--border2); border-radius: var(--radius);
+      background: var(--bg2); color: var(--text); outline: none;
+      -webkit-appearance: none; min-height: var(--tap);
+    }
     .vocab-search input:focus { border-color: var(--accent); }
-    table.vocab-tbl { width: 100%; border-collapse: collapse; font-size: 14px; }
-    table.vocab-tbl th { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .4px; color: var(--text2); padding: 8px 12px; border-bottom: 1px solid var(--border2); text-align: left; background: var(--bg); position: sticky; top: 0; z-index:5;}
-    table.vocab-tbl td { padding: 8px 12px; border-bottom: 0.5px solid var(--border); }
-    table.vocab-tbl .cat-sep td { background: var(--bg3) !important; font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: .6px; padding: 5px 12px; }
+
+    table.vocab-tbl { width: 100%; border-collapse: collapse; table-layout: fixed; }
+    table.vocab-tbl col.vc-num  { width: 36px; }
+    table.vocab-tbl col.vc-it   { width: 42%; }
+    table.vocab-tbl col.vc-gr   { width: auto; }
+    table.vocab-tbl th {
+      font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .4px; color: var(--text2); padding: 9px 10px;
+      border-bottom: 1px solid var(--border2); text-align: left;
+      background: var(--bg); position: sticky; top: 0; z-index: 5;
+    }
+    table.vocab-tbl td { padding: 9px 10px; border-bottom: 0.5px solid var(--border); font-size: 15px; line-height: 1.4; word-break: break-word; }
+    table.vocab-tbl .cat-sep td { background: var(--bg3) !important; font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: .6px; padding: 6px 10px; }
     .badge { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: var(--accent-light); color: var(--accent); }
 
+    /* STATS */
     .stats-wrap { padding: 14px; }
     .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
-    .stat-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 14px; text-align: center; }
-    .stat-card .val { font-size: 28px; font-weight: 700; color: var(--accent); }
-    .stat-card .lbl { font-size: 12px; color: var(--text2); margin-top: 4px; }
+    .stat-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 16px; text-align: center; }
+    .stat-card .val { font-size: 30px; font-weight: 700; color: var(--accent); }
+    .stat-card .lbl { font-size: 13px; color: var(--text2); margin-top: 4px; }
     .hist-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 14px; }
-    .hist-card h3 { font-size: 13px; font-weight: 600; color: var(--text2); margin-bottom: 12px; }
+    .hist-card h3 { font-size: 14px; font-weight: 600; color: var(--text2); margin-bottom: 12px; }
     .hist-list { list-style: none; }
-    .hist-list li { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 0.5px solid var(--border); font-size: 13px; }
+    .hist-list li { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 0.5px solid var(--border); font-size: 14px; }
     .hist-list li:last-child { border-bottom: none; }
-    .hist-date { color: var(--text2); font-size: 12px; }
-    .pct-badge { font-size: 12px; padding: 2px 10px; border-radius: 999px; background: var(--accent-light); color: var(--accent); font-weight: 600; }
+    .hist-date { color: var(--text2); font-size: 12px; margin-left: 6px; }
+    .pct-badge { font-size: 13px; padding: 3px 12px; border-radius: 999px; background: var(--accent-light); color: var(--accent); font-weight: 700; }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>🇮🇹 Ιταλικό Λεξιλόγιο</h1>
+  <h1>🇮🇹 Italiano</h1>
   <div class="score-pills">
     <div class="pill green">✓ <b id="hdr-ok">0</b></div>
     <div class="pill red">✗ <b id="hdr-ko">0</b></div>
@@ -121,65 +213,68 @@
   <button class="tab-btn" onclick="showPage('stats')">Στατιστικά</button>
 </div>
 
-<!-- QUIZ PAGE -->
+<!-- QUIZ -->
 <div id="page-quiz" class="page active">
   <div class="toolbar">
-    <button class="toolbar-btn active" id="dir-gr" onclick="setDir('gr')">🇮🇹→🇬🇷 Ελληνικά</button>
-    <button class="toolbar-btn" id="dir-it" onclick="setDir('it')">🇬🇷→🇮🇹 Ιταλικά</button>
+    <button class="dir-btn active" id="dir-gr" onclick="setDir('gr')">🇮🇹→🇬🇷</button>
+    <button class="dir-btn" id="dir-it" onclick="setDir('it')">🇬🇷→🇮🇹</button>
     <div class="toolbar-sep"></div>
     <button class="btn-reset" onclick="resetQuiz()">↺ Καθαρισμός</button>
   </div>
   <div class="cat-filter" id="quiz-cat-filter"></div>
   <div class="table-wrap">
     <table class="quiz-tbl">
+      <colgroup>
+        <col class="c-num"><col class="c-word"><col class="c-ans"><col class="c-chk">
+      </colgroup>
       <thead><tr>
-        <th class="row-num">#</th>
+        <th></th>
         <th id="col-q">Ιταλικά</th>
-        <th id="col-a">Απάντηση (Ελληνικά)</th>
-        <th style="width:30px"></th>
+        <th id="col-a">Ελληνικά</th>
+        <th></th>
       </tr></thead>
       <tbody id="quiz-body"></tbody>
     </table>
   </div>
   <div class="bottom-bar">
-    <div style="font-size:13px;color:var(--text2);" id="bottom-info">Γράψε τις απαντήσεις και πάτα Έλεγχος</div>
+    <div class="bottom-info" id="bottom-info">Γράψε και πάτα Έλεγχος</div>
     <button class="btn-check-all" onclick="checkAll()">Έλεγχος ✓</button>
   </div>
 </div>
 
-<!-- VOCAB PAGE -->
+<!-- VOCAB -->
 <div id="page-vocab" class="page">
   <div class="vocab-search">
-    <input type="search" placeholder="Αναζήτηση..." id="vsearch" oninput="renderVocab()" />
+    <input type="search" placeholder="🔍 Αναζήτηση..." id="vsearch" oninput="renderVocab()" />
   </div>
   <div class="table-wrap">
     <table class="vocab-tbl">
-      <thead><tr><th style="width:32px">#</th><th>Ιταλικά</th><th>Ελληνικά</th><th>Κατηγορία</th></tr></thead>
+      <colgroup><col class="vc-num"><col class="vc-it"><col class="vc-gr"></colgroup>
+      <thead><tr><th>#</th><th>Ιταλικά</th><th>Ελληνικά</th></tr></thead>
       <tbody id="vocab-body"></tbody>
     </table>
   </div>
 </div>
 
-<!-- STATS PAGE -->
+<!-- STATS -->
 <div id="page-stats" class="page">
   <div class="stats-wrap">
     <div class="stats-grid">
-      <div class="stat-card"><div class="val" id="st-total">—</div><div class="lbl">Συνολικές απαντήσεις</div></div>
-      <div class="stat-card"><div class="val" id="st-pct">—</div><div class="lbl">Ποσοστό επιτυχίας</div></div>
+      <div class="stat-card"><div class="val" id="st-total">—</div><div class="lbl">Απαντήσεις</div></div>
+      <div class="stat-card"><div class="val" id="st-pct">—</div><div class="lbl">Επιτυχία</div></div>
       <div class="stat-card"><div class="val" id="st-sessions">0</div><div class="lbl">Συνεδρίες</div></div>
-      <div class="stat-card"><div class="val" id="st-best">—</div><div class="lbl">Καλύτερο σκορ</div></div>
+      <div class="stat-card"><div class="val" id="st-best">—</div><div class="lbl">Καλύτερο</div></div>
     </div>
     <div class="hist-card">
-      <h3>Ιστορικό</h3>
-      <ul class="hist-list" id="hist-list"><li style="color:var(--text2)">Δεν υπάρχουν ακόμα συνεδρίες.</li></ul>
+      <h3>Ιστορικό συνεδριών</h3>
+      <ul class="hist-list" id="hist-list"><li style="color:var(--text2)">Δεν υπάρχουν ακόμα.</li></ul>
     </div>
-    <button onclick="clearStats()" style="margin-top:12px;width:100%;padding:10px;border-radius:var(--radius);border:0.5px solid var(--red-border);color:var(--red-border);background:none;cursor:pointer;font-size:13px;">Εκκαθάριση στατιστικών</button>
+    <button onclick="clearStats()" style="margin-top:12px;width:100%;padding:13px;border-radius:var(--radius);border:0.5px solid var(--red-border);color:var(--red-border);background:none;cursor:pointer;font-size:14px;">Εκκαθάριση στατιστικών</button>
   </div>
 </div>
 
 <script>
 const vocab = [
-  // ΧΑΙΡΕΤΙΣΜΟΙ & ΒΑΣΙΚΕΣ ΕΚΦΡΑΣΕΙΣ
   {it:"Buongiorno",gr:"Καλημέρα",cat:"χαιρετισμοί"},
   {it:"Buonasera",gr:"Καλησπέρα",cat:"χαιρετισμοί"},
   {it:"Buonanotte",gr:"Καληνύχτα",cat:"χαιρετισμοί"},
@@ -194,17 +289,15 @@ const vocab = [
   {it:"Prego",gr:"Παρακαλώ - Τίποτα",cat:"χαιρετισμοί"},
   {it:"Scusa - Scusi",gr:"Συγγνώμη",cat:"χαιρετισμοί"},
   {it:"Mi dispiace",gr:"Λυπάμαι - Με συγχωρείς",cat:"χαιρετισμοί"},
-  {it:"Figurati",gr:"Μην το λες - Παρακαλώ (δεν χρειάζεται)",cat:"χαιρετισμοί"},
+  {it:"Figurati",gr:"Μην το λες - Παρακαλώ",cat:"χαιρετισμοί"},
   {it:"Volentieri",gr:"Ευχαρίστως",cat:"χαιρετισμοί"},
   {it:"Purtroppo non posso",gr:"Δυστυχώς δεν μπορώ",cat:"χαιρετισμοί"},
-
-  // ΠΡΟΣΩΠΙΚΕΣ ΠΛΗΡΟΦΟΡΙΕΣ
   {it:"Nome",gr:"Όνομα",cat:"προσωπικά στοιχεία"},
   {it:"Età",gr:"Ηλικία",cat:"προσωπικά στοιχεία"},
   {it:"Nazionalità",gr:"Εθνικότητα",cat:"προσωπικά στοιχεία"},
   {it:"Straniero - Straniera",gr:"Ξένος - Ξένη",cat:"προσωπικά στοιχεία"},
   {it:"Chiamarsi",gr:"Λέγομαι - Ονομάζομαι",cat:"προσωπικά στοιχεία"},
-  {it:"Forma di cortesia",gr:"Ευγενική μορφή (τύπος ευγενείας)",cat:"προσωπικά στοιχεία"},
+  {it:"Forma di cortesia",gr:"Ευγενική μορφή",cat:"προσωπικά στοιχεία"},
   {it:"Di dove sei?",gr:"Από που είσαι;",cat:"προσωπικά στοιχεία"},
   {it:"Quanti anni hai?",gr:"Πόσων χρόνων είσαι;",cat:"προσωπικά στοιχεία"},
   {it:"Dove abiti?",gr:"Που μένεις;",cat:"προσωπικά στοιχεία"},
@@ -212,8 +305,6 @@ const vocab = [
   {it:"Amici",gr:"Φίλοι",cat:"προσωπικά στοιχεία"},
   {it:"Marito - Moglie",gr:"Σύζυγος (άνδρας) - Σύζυγος (γυναίκα)",cat:"προσωπικά στοιχεία"},
   {it:"Figlio - Figlia",gr:"Γιος - Κόρη",cat:"προσωπικά στοιχεία"},
-
-  // ΠΕΡΙΓΡΑΦΗ ΠΡΟΣΩΠΟΥ
   {it:"Alto - Basso",gr:"Ψηλός - Κοντός",cat:"περιγραφή προσώπου"},
   {it:"Magro - Grasso",gr:"Αδύνατος - Χοντρός",cat:"περιγραφή προσώπου"},
   {it:"Biondo - Bruno",gr:"Ξανθός - Μελαχρινός",cat:"περιγραφή προσώπου"},
@@ -222,8 +313,6 @@ const vocab = [
   {it:"I capelli - Gli occhi",gr:"Τα μαλλιά - Τα μάτια",cat:"περιγραφή προσώπου"},
   {it:"Giovane - Anziano",gr:"Νέος - Ηλικιωμένος",cat:"περιγραφή προσώπου"},
   {it:"Bello - Brutto",gr:"Όμορφος - Άσχημος",cat:"περιγραφή προσώπου"},
-
-  // ΕΠΙΡΡΗΜΑΤΑ ΤΟΠΟΥ
   {it:"Sopra",gr:"Πάνω",cat:"επιρρήματα τόπου"},
   {it:"Su",gr:"Πάνω",cat:"επιρρήματα τόπου"},
   {it:"Sotto",gr:"Κάτω",cat:"επιρρήματα τόπου"},
@@ -241,8 +330,6 @@ const vocab = [
   {it:"A destra",gr:"Δεξιά",cat:"επιρρήματα τόπου"},
   {it:"A sinistra",gr:"Αριστερά",cat:"επιρρήματα τόπου"},
   {it:"Dritto",gr:"Ευθεία",cat:"επιρρήματα τόπου"},
-
-  // ΧΡΟΝΟΣ
   {it:"Che ora è? - Che ore sono?",gr:"Τι ώρα είναι;",cat:"χρόνος"},
   {it:"Mezzogiorno",gr:"Μεσημέρι",cat:"χρόνος"},
   {it:"Mezzanotte",gr:"Μεσάνυχτα",cat:"χρόνος"},
@@ -251,7 +338,6 @@ const vocab = [
   {it:"Pomeriggio",gr:"Απόγευμα",cat:"χρόνος"},
   {it:"Sera",gr:"Βράδυ - Απόγευμα",cat:"χρόνος"},
   {it:"Fine settimana",gr:"Σαββατοκύριακο",cat:"χρόνος"},
-  {it:"I giorni della settimana",gr:"Οι ημέρες της εβδομάδας",cat:"χρόνος"},
   {it:"Lunedì",gr:"Δευτέρα",cat:"χρόνος"},
   {it:"Martedì",gr:"Τρίτη",cat:"χρόνος"},
   {it:"Mercoledì",gr:"Τετάρτη",cat:"χρόνος"},
@@ -266,8 +352,6 @@ const vocab = [
   {it:"Sempre",gr:"Πάντα",cat:"χρόνος"},
   {it:"Mai",gr:"Ποτέ",cat:"χρόνος"},
   {it:"Spesso",gr:"Συχνά",cat:"χρόνος"},
-
-  // ΑΡΙΘΜΟΙ ΤΑΚΤΙΚΟΙ
   {it:"Primo",gr:"Πρώτος",cat:"τακτικοί αριθμοί"},
   {it:"Secondo",gr:"Δεύτερος",cat:"τακτικοί αριθμοί"},
   {it:"Terzo",gr:"Τρίτος",cat:"τακτικοί αριθμοί"},
@@ -278,8 +362,6 @@ const vocab = [
   {it:"Ottavo",gr:"Όγδοος",cat:"τακτικοί αριθμοί"},
   {it:"Nono",gr:"Ένατος",cat:"τακτικοί αριθμοί"},
   {it:"Decimo",gr:"Δέκατος",cat:"τακτικοί αριθμοί"},
-
-  // ΣΠΙΤΙ & ΔΩΜΑΤΙΑ
   {it:"Appartamento",gr:"Διαμέρισμα",cat:"σπίτι"},
   {it:"Ingresso",gr:"Είσοδος - Χολ",cat:"σπίτι"},
   {it:"Soggiorno - Salotto",gr:"Σαλόνι",cat:"σπίτι"},
@@ -295,8 +377,6 @@ const vocab = [
   {it:"Luminoso",gr:"Φωτεινός",cat:"σπίτι"},
   {it:"Piano",gr:"Όροφος",cat:"σπίτι"},
   {it:"Palazzo",gr:"Πολυκατοικία - Κτήριο",cat:"σπίτι"},
-
-  // ΕΠΙΠΛΑ & ΑΝΤΙΚΕΙΜΕΝΑ ΣΠΙΤΙΟΥ
   {it:"Divano",gr:"Καναπές",cat:"έπιπλα"},
   {it:"Poltrona",gr:"Πολυθρόνα",cat:"έπιπλα"},
   {it:"Libreria",gr:"Βιβλιοθήκη",cat:"έπιπλα"},
@@ -315,8 +395,6 @@ const vocab = [
   {it:"Cuscino",gr:"Μαξιλάρι",cat:"έπιπλα"},
   {it:"Quadro",gr:"Πίνακας ζωγραφικής",cat:"έπιπλα"},
   {it:"Pianta",gr:"Φυτό - Κάτοψη",cat:"έπιπλα"},
-
-  // ΜΕΤΑΦΟΡΕΣ & ΠΟΛΗ
   {it:"Autobus - Metro - Tram",gr:"Λεωφορείο - Μετρό - Τραμ",cat:"μεταφορές"},
   {it:"Biglietto",gr:"Εισιτήριο",cat:"μεταφορές"},
   {it:"Abbonamento",gr:"Συνδρομή - Μηνιαίο εισιτήριο",cat:"μεταφορές"},
@@ -334,8 +412,6 @@ const vocab = [
   {it:"Edicola",gr:"Περίπτερο εφημερίδων",cat:"μεταφορές"},
   {it:"Macchinette automatiche",gr:"Αυτόματες μηχανές",cat:"μεταφορές"},
   {it:"Appuntamento",gr:"Ραντεβού",cat:"μεταφορές"},
-
-  // ΕΛΕΥΘΕΡΟΣ ΧΡΟΝΟΣ & ΧΟΜΠΙ
   {it:"Tempo libero",gr:"Ελεύθερος χρόνος",cat:"ελεύθερος χρόνος"},
   {it:"Ascoltare musica",gr:"Να ακούς μουσική",cat:"ελεύθερος χρόνος"},
   {it:"Leggere un libro",gr:"Να διαβάζεις βιβλίο",cat:"ελεύθερος χρόνος"},
@@ -352,8 +428,6 @@ const vocab = [
   {it:"Viaggiare",gr:"Ταξιδεύω",cat:"ελεύθερος χρόνος"},
   {it:"Cucinare",gr:"Μαγειρεύω",cat:"ελεύθερος χρόνος"},
   {it:"Disegnare",gr:"Σχεδιάζω - Ζωγραφίζω",cat:"ελεύθερος χρόνος"},
-
-  // ΠΡΟΣΚΛΗΣΕΙΣ & ΚΟΙΝΩΝΙΚΕΣ ΚΑΤΑΣΤΑΣΕΙΣ
   {it:"Invitare qualcuno",gr:"Να προσκαλέσεις κάποιον",cat:"κοινωνικές εκφράσεις"},
   {it:"Accettare un invito",gr:"Να αποδεχτείς μια πρόσκληση",cat:"κοινωνικές εκφράσεις"},
   {it:"Rifiutare un invito",gr:"Να αρνηθείς μια πρόσκληση",cat:"κοινωνικές εκφράσεις"},
@@ -363,8 +437,6 @@ const vocab = [
   {it:"Forse",gr:"Ίσως",cat:"κοινωνικές εκφράσεις"},
   {it:"Auguri!",gr:"Χρόνια πολλά! - Εύχομαι!",cat:"κοινωνικές εκφράσεις"},
   {it:"In bocca al lupo!",gr:"Καλή τύχη!",cat:"κοινωνικές εκφράσεις"},
-
-  // ΤΕΧΝΟΛΟΓΙΑ & ΔΟΥΛΕΙΑ
   {it:"Messaggio - Email",gr:"Μήνυμα - Email",cat:"τεχνολογία"},
   {it:"Computer - Tablet",gr:"Υπολογιστής - Tablet",cat:"τεχνολογία"},
   {it:"Computer - Portatile",gr:"Υπολογιστής - Laptop",cat:"τεχνολογία"},
@@ -377,8 +449,6 @@ const vocab = [
   {it:"Messaggio",gr:"Μήνυμα",cat:"τεχνολογία"},
   {it:"Lavorare",gr:"Εργάζομαι - Δουλεύω",cat:"τεχνολογία"},
   {it:"Pausa pranzo",gr:"Διάλειμμα μεσημεριανού",cat:"τεχνολογία"},
-
-  // ΑΝΤΙΚΕΙΜΕΝΑ ΚΑΘΗΜΕΡΙΝΗΣ ΖΩΗΣ
   {it:"Chiave - Chiavi",gr:"Κλειδί - Κλειδιά",cat:"αντικείμενα"},
   {it:"Borsa",gr:"Τσάντα",cat:"αντικείμενα"},
   {it:"Zaino",gr:"Σακίδιο",cat:"αντικείμενα"},
@@ -389,8 +459,6 @@ const vocab = [
   {it:"Occhiali",gr:"Γυαλιά",cat:"αντικείμενα"},
   {it:"Portafoglio",gr:"Πορτοφόλι",cat:"αντικείμενα"},
   {it:"Orologio",gr:"Ρολόι",cat:"αντικείμενα"},
-
-  // ΦΑΓΗΤΟ & ΠΟΤΟ
   {it:"Pizza",gr:"Πίτσα",cat:"φαγητό"},
   {it:"Pasta",gr:"Ζυμαρικά",cat:"φαγητό"},
   {it:"Caffè",gr:"Καφές",cat:"φαγητό"},
@@ -406,8 +474,6 @@ const vocab = [
   {it:"Ristorante",gr:"Εστιατόριο",cat:"φαγητό"},
   {it:"Menù",gr:"Μενού",cat:"φαγητό"},
   {it:"Conto",gr:"Λογαριασμός",cat:"φαγητό"},
-
-  // ΡΗΜΑΤΑ (ΒΑΣΙΚΑ - ανώμαλα/essere)
   {it:"essere",gr:"είμαι",cat:"ρήματα essere"},
   {it:"avere",gr:"έχω",cat:"ρήματα essere"},
   {it:"fare",gr:"κάνω",cat:"ρήματα essere"},
@@ -418,8 +484,6 @@ const vocab = [
   {it:"potere",gr:"μπορώ",cat:"ρήματα essere"},
   {it:"volere",gr:"θέλω",cat:"ρήματα essere"},
   {it:"dovere",gr:"πρέπει - οφείλω",cat:"ρήματα essere"},
-
-  // ΡΗΜΑΤΑ ΚΙΝΗΣΗΣ (με essere)
   {it:"andare",gr:"πηγαίνω",cat:"ρήματα κίνησης"},
   {it:"venire",gr:"έρχομαι",cat:"ρήματα κίνησης"},
   {it:"partire",gr:"αναχωρώ",cat:"ρήματα κίνησης"},
@@ -427,8 +491,6 @@ const vocab = [
   {it:"ritornare",gr:"επιστρέφω",cat:"ρήματα κίνησης"},
   {it:"entrare",gr:"μπαίνω",cat:"ρήματα κίνησης"},
   {it:"uscire",gr:"βγαίνω",cat:"ρήματα κίνησης"},
-  {it:"salire",gr:"ανεβαίνω - επιβιβάζομαι",cat:"ρήματα κίνησης"},
-  {it:"scendere",gr:"κατεβαίνω - αποβιβάζομαι",cat:"ρήματα κίνησης"},
   {it:"cadere",gr:"πέφτω",cat:"ρήματα κίνησης"},
   {it:"rimanere",gr:"μένω - παραμένω",cat:"ρήματα κίνησης"},
   {it:"restare",gr:"μένω - μένω πίσω",cat:"ρήματα κίνησης"},
@@ -436,8 +498,6 @@ const vocab = [
   {it:"morire",gr:"πεθαίνω",cat:"ρήματα κίνησης"},
   {it:"diventare",gr:"γίνομαι",cat:"ρήματα κίνησης"},
   {it:"giungere",gr:"φτάνω",cat:"ρήματα κίνησης"},
-
-  // ΑΛΛΑ ΡΗΜΑΤΑ
   {it:"mangiare",gr:"τρώω",cat:"ρήματα"},
   {it:"bere",gr:"πίνω",cat:"ρήματα"},
   {it:"parlare",gr:"μιλώ",cat:"ρήματα"},
@@ -458,7 +518,6 @@ const vocab = [
   {it:"ridere",gr:"γελώ",cat:"ρήματα"},
   {it:"piangere",gr:"κλαίω",cat:"ρήματα"},
   {it:"dormire",gr:"κοιμάμαι",cat:"ρήματα"},
-  {it:"lavorare",gr:"εργάζομαι - δουλεύω",cat:"ρήματα"},
   {it:"riuscire",gr:"καταφέρνω",cat:"ρήματα"},
   {it:"costare",gr:"κοστίζω",cat:"ρήματα"},
   {it:"piacere",gr:"αρέσω",cat:"ρήματα"},
@@ -496,7 +555,7 @@ const vocab = [
 
 let direction = 'gr';
 let activeCat = 'all';
-let quizRows = []; // {vocab index, row index in filtered}
+const cats = ['all', ...new Set(vocab.map(v => v.cat))];
 
 function normGr(s) {
   return s.toLowerCase()
@@ -514,33 +573,25 @@ function normAll(s) { return normGr(normIt(s)); }
 function isCorrect(input, correct) {
   const ni = normAll(input);
   if (!ni) return false;
-  // try exact match
   if (normAll(correct) === ni) return true;
-  // try each variant split by ' - '
-  const variants = correct.split(' - ').map(v => normAll(v.trim()));
-  return variants.some(v => v === ni);
+  return correct.split(' - ').map(v => normAll(v.trim())).some(v => v === ni);
 }
-
-const cats = ['all', ...new Set(vocab.map(v => v.cat))];
 
 function filteredVocab() {
   return activeCat === 'all' ? vocab : vocab.filter(v => v.cat === activeCat);
 }
 
-// BUILD CAT FILTER BUTTONS
 function buildCatFilter() {
-  const el = document.getElementById('quiz-cat-filter');
-  el.innerHTML = cats.map(c =>
+  document.getElementById('quiz-cat-filter').innerHTML = cats.map(c =>
     `<button class="cat-btn${c==='all'?' active':''}" onclick="setCat('${c}')">${c==='all'?'Όλες':c}</button>`
   ).join('');
 }
 
 function setCat(c) {
   activeCat = c;
-  document.querySelectorAll('.cat-btn').forEach(b => {
-    const label = b.textContent;
-    b.classList.toggle('active', (c==='all' && label==='Όλες') || label===c);
-  });
+  document.querySelectorAll('.cat-btn').forEach(b =>
+    b.classList.toggle('active', b.textContent === (c==='all'?'Όλες':c))
+  );
   renderQuiz();
 }
 
@@ -549,49 +600,44 @@ function setDir(d) {
   document.getElementById('dir-gr').classList.toggle('active', d==='gr');
   document.getElementById('dir-it').classList.toggle('active', d==='it');
   document.getElementById('col-q').textContent = d==='gr' ? 'Ιταλικά' : 'Ελληνικά';
-  document.getElementById('col-a').textContent = d==='gr' ? 'Απάντηση (Ελληνικά)' : 'Απάντηση (Ιταλικά)';
+  document.getElementById('col-a').textContent = d==='gr' ? 'Ελληνικά' : 'Ιταλικά';
   renderQuiz();
 }
 
 function renderQuiz() {
   const fv = filteredVocab();
-  const tbody = document.getElementById('quiz-body');
-  let html = '';
-  let lastCat = null;
-  let rowNum = 0;
-
+  let html = '', lastCat = null, num = 0;
   fv.forEach((v, i) => {
     if (v.cat !== lastCat) {
       html += `<tr class="cat-sep"><td colspan="4">${v.cat}</td></tr>`;
       lastCat = v.cat;
     }
+    num++;
     const q = direction==='gr' ? v.it : v.gr;
-    rowNum++;
     html += `<tr>
-      <td class="row-num">${rowNum}</td>
+      <td class="row-num">${num}</td>
       <td class="it-word">${q}</td>
-      <td><input class="answer-inp" id="inp-${i}" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onkeydown="handleKey(event,'${i}',${JSON.stringify(fv.map((_,j)=>j))})" /></td>
+      <td><input class="answer-inp" id="inp-${i}" type="text"
+        autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+        inputmode="text"
+        onkeydown="if(event.key==='Enter'){event.preventDefault();nextInput(${i},${JSON.stringify(fv.map((_,j)=>j))})}" /></td>
       <td class="check-cell" id="chk-${i}"></td>
     </tr>`;
   });
-  tbody.innerHTML = html;
+  document.getElementById('quiz-body').innerHTML = html;
+  document.getElementById('bottom-info').textContent = fv.length + ' λέξεις';
   updateHeader(0,0);
-  document.getElementById('bottom-info').textContent = `${fv.length} λέξεις — γράψε και πάτα Έλεγχος`;
 }
 
-function handleKey(e, idx, idxList) {
-  if (e.key !== 'Enter') return;
-  e.preventDefault();
-  const pos = idxList.indexOf(parseInt(idx));
-  if (pos < idxList.length - 1) {
-    document.getElementById('inp-'+idxList[pos+1])?.focus();
-  }
+function nextInput(cur, idxList) {
+  const pos = idxList.indexOf(cur);
+  if (pos < idxList.length-1) document.getElementById('inp-'+idxList[pos+1])?.focus();
 }
 
 function checkAll() {
   const fv = filteredVocab();
-  let ok = 0, ko = 0, empty = 0;
-  fv.forEach((v, i) => {
+  let ok=0, ko=0, empty=0;
+  fv.forEach((v,i) => {
     const inp = document.getElementById('inp-'+i);
     if (!inp) return;
     const val = inp.value.trim();
@@ -599,66 +645,59 @@ function checkAll() {
     const correct = direction==='gr' ? v.gr : v.it;
     if (isCorrect(val, correct)) {
       inp.classList.add('correct'); inp.classList.remove('wrong');
-      document.getElementById('chk-'+i).textContent = '✓'; ok++;
+      document.getElementById('chk-'+i).textContent='✓'; ok++;
     } else {
       inp.classList.add('wrong'); inp.classList.remove('correct');
-      document.getElementById('chk-'+i).textContent = '✗'; ko++;
+      document.getElementById('chk-'+i).textContent='✗'; ko++;
     }
   });
-  updateHeader(ok, ko);
-  if (ok+ko > 0) saveSession(ok, ko);
-  document.getElementById('bottom-info').textContent = `✓ ${ok} σωστά · ✗ ${ko} λάθη · ${empty} κενά`;
+  updateHeader(ok,ko);
+  if(ok+ko>0) saveSession(ok,ko);
+  document.getElementById('bottom-info').textContent = `✓${ok} ✗${ko} κενά:${empty}`;
 }
 
-function updateHeader(ok, ko) {
-  document.getElementById('hdr-ok').textContent = ok;
-  document.getElementById('hdr-ko').textContent = ko;
-  const total = ok+ko;
-  document.getElementById('hdr-pct').textContent = total>0 ? Math.round(ok/total*100)+'%' : '—';
+function updateHeader(ok,ko) {
+  document.getElementById('hdr-ok').textContent=ok;
+  document.getElementById('hdr-ko').textContent=ko;
+  const t=ok+ko;
+  document.getElementById('hdr-pct').textContent=t>0?Math.round(ok/t*100)+'%':'—';
 }
 
 function resetQuiz() {
-  const fv = filteredVocab();
-  fv.forEach((_, i) => {
-    const inp = document.getElementById('inp-'+i);
-    if (!inp) return;
+  filteredVocab().forEach((_,i) => {
+    const inp=document.getElementById('inp-'+i);
+    if(!inp) return;
     inp.value=''; inp.classList.remove('correct','wrong');
     document.getElementById('chk-'+i).textContent='';
   });
   updateHeader(0,0);
-  document.getElementById('bottom-info').textContent = `${fv.length} λέξεις — γράψε και πάτα Έλεγχος`;
+  document.getElementById('bottom-info').textContent=filteredVocab().length+' λέξεις';
 }
 
-// VOCAB
 function renderVocab() {
-  const q = (document.getElementById('vsearch')?.value||'').toLowerCase();
+  const q=(document.getElementById('vsearch')?.value||'').toLowerCase();
   let html='', lastCat=null, num=0;
-  vocab.filter(v => !q || v.it.toLowerCase().includes(q) || v.gr.toLowerCase().includes(q))
-    .forEach(v => {
-      if (!q && v.cat !== lastCat) {
-        html += `<tr class="cat-sep"><td colspan="4">${v.cat}</td></tr>`;
-        lastCat = v.cat;
+  vocab.filter(v=>!q||v.it.toLowerCase().includes(q)||v.gr.toLowerCase().includes(q))
+    .forEach(v=>{
+      if(!q && v.cat!==lastCat){
+        html+=`<tr class="cat-sep"><td colspan="3">${v.cat}</td></tr>`;
+        lastCat=v.cat;
       }
       num++;
-      html += `<tr><td style="font-size:11px;color:var(--text2);text-align:center;width:32px">${num}</td><td style="font-weight:500">${v.it}</td><td>${v.gr}</td><td><span class="badge">${v.cat}</span></td></tr>`;
+      html+=`<tr><td style="font-size:12px;color:var(--text2);text-align:center">${num}</td><td style="font-weight:500">${v.it}</td><td>${v.gr}</td></tr>`;
     });
-  document.getElementById('vocab-body').innerHTML = html;
+  document.getElementById('vocab-body').innerHTML=html;
 }
 
-// STATS
-function loadStats() {
-  try { return JSON.parse(localStorage.getItem('it_stats')||'{"total":0,"correct":0,"sessions":[]}'); }
-  catch(e) { return {total:0,correct:0,sessions:[]}; }
-}
-function saveSession(ok,ko) {
-  if(ok+ko===0) return;
+function loadStats(){try{return JSON.parse(localStorage.getItem('it_stats')||'{"total":0,"correct":0,"sessions":[]}')}catch(e){return{total:0,correct:0,sessions:[]}}}
+function saveSession(ok,ko){
   const s=loadStats();
-  s.total+=ok+ko; s.correct+=ok;
+  s.total+=ok+ko;s.correct+=ok;
   s.sessions.unshift({date:new Date().toLocaleDateString('el-GR'),ok,total:ok+ko,pct:Math.round(ok/(ok+ko)*100)});
-  if(s.sessions.length>20) s.sessions.pop();
+  if(s.sessions.length>20)s.sessions.pop();
   localStorage.setItem('it_stats',JSON.stringify(s));
 }
-function renderStats() {
+function renderStats(){
   const s=loadStats();
   document.getElementById('st-total').textContent=s.total||'—';
   document.getElementById('st-pct').textContent=s.total?Math.round(s.correct/s.total*100)+'%':'—';
@@ -668,19 +707,17 @@ function renderStats() {
   const ul=document.getElementById('hist-list');
   ul.innerHTML=s.sessions.length
     ?s.sessions.map(x=>`<li><span>${x.ok}/${x.total} σωστά <span class="hist-date">${x.date}</span></span><span class="pct-badge">${x.pct}%</span></li>`).join('')
-    :'<li style="color:var(--text2)">Δεν υπάρχουν ακόμα συνεδρίες.</li>';
+    :'<li style="color:var(--text2)">Δεν υπάρχουν ακόμα.</li>';
 }
-function clearStats() {
-  if(confirm('Να διαγραφούν τα στατιστικά;')) { localStorage.removeItem('it_stats'); renderStats(); }
-}
+function clearStats(){if(confirm('Να διαγραφούν τα στατιστικά;')){localStorage.removeItem('it_stats');renderStats();}}
 
-function showPage(p) {
-  ['quiz','vocab','stats'].forEach((x,i) => {
-    document.getElementById('page-'+x).classList.toggle('active', x===p);
-    document.querySelectorAll('.tab-btn')[i].classList.toggle('active', x===p);
+function showPage(p){
+  ['quiz','vocab','stats'].forEach((x,i)=>{
+    document.getElementById('page-'+x).classList.toggle('active',x===p);
+    document.querySelectorAll('.tab-btn')[i].classList.toggle('active',x===p);
   });
-  if(p==='vocab') renderVocab();
-  if(p==='stats') renderStats();
+  if(p==='vocab')renderVocab();
+  if(p==='stats')renderStats();
 }
 
 buildCatFilter();
