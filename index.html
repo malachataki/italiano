@@ -6,208 +6,113 @@
   <title>Ιταλικό Λεξιλόγιο</title>
   <meta name="description" content="Εξάσκηση ιταλικού λεξιλογίου με ελληνική μετάφραση" />
   <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#ffffff" />
+  <meta name="theme-color" content="#533fb7" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="Italiano" />
   <link rel="apple-touch-icon" href="icon-192.png" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --bg: #ffffff;
-      --bg2: #f5f5f3;
-      --bg3: #ededea;
-      --text: #1a1a18;
-      --text2: #6b6b67;
-      --border: rgba(0,0,0,0.12);
-      --border2: rgba(0,0,0,0.22);
-      --radius: 10px;
-      --radius-lg: 14px;
-      --green-bg: #e1f5ee;
-      --green-text: #085041;
-      --green-border: #1D9E75;
-      --red-bg: #fcebeb;
-      --red-text: #501313;
-      --red-border: #e24b4a;
-      --accent: #533fb7;
+      --bg: #ffffff; --bg2: #f5f5f3; --bg3: #ededea;
+      --text: #1a1a18; --text2: #6b6b67;
+      --border: rgba(0,0,0,0.1); --border2: rgba(0,0,0,0.2);
+      --accent: #533fb7; --accent-light: #eeedfe;
+      --green-bg: #e1f5ee; --green-text: #085041; --green-border: #1D9E75;
+      --red-bg: #fcebeb; --red-text: #501313; --red-border: #e24b4a;
+      --radius: 8px; --radius-lg: 12px;
     }
-
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #1c1c1a;
-        --bg2: #252523;
-        --bg3: #2f2f2c;
-        --text: #f0ede8;
-        --text2: #9a9a94;
-        --border: rgba(255,255,255,0.1);
-        --border2: rgba(255,255,255,0.2);
-        --green-bg: #04342c;
-        --green-text: #9fe1cb;
-        --green-border: #1D9E75;
-        --red-bg: #501313;
-        --red-text: #f7c1c1;
-        --red-border: #e24b4a;
-        --accent: #afa9ec;
+        --bg: #1c1c1a; --bg2: #252523; --bg3: #2f2f2c;
+        --text: #f0ede8; --text2: #9a9a94;
+        --border: rgba(255,255,255,0.08); --border2: rgba(255,255,255,0.18);
+        --accent-light: #26215c;
+        --green-bg: #04342c; --green-text: #9fe1cb;
+        --red-bg: #501313; --red-text: #f7c1c1;
       }
     }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg2); color: var(--text); min-height: 100vh; }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--bg2);
-      color: var(--text);
-      min-height: 100vh;
-      padding: 0 0 80px;
-    }
+    /* HEADER */
+    header { background: var(--bg); border-bottom: 0.5px solid var(--border2); padding: 12px 16px; position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+    header h1 { font-size: 16px; font-weight: 600; white-space: nowrap; }
+    .score-pills { display: flex; gap: 6px; flex-shrink: 0; }
+    .pill { font-size: 12px; padding: 3px 10px; border-radius: 999px; border: 0.5px solid var(--border2); color: var(--text2); background: var(--bg2); white-space: nowrap; }
+    .pill b { color: var(--text); }
+    .pill.green { background: var(--green-bg); color: var(--green-text); border-color: var(--green-border); }
+    .pill.red { background: var(--red-bg); color: var(--red-text); border-color: var(--red-border); }
 
-    header {
-      background: var(--bg);
-      border-bottom: 0.5px solid var(--border);
-      padding: 14px 20px;
-      position: sticky; top: 0; z-index: 10;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-
-    header h1 { font-size: 17px; font-weight: 600; }
-    header .flag { font-size: 22px; }
-
-    .score-bar {
-      display: flex; gap: 8px;
-    }
-    .pill {
-      font-size: 12px; padding: 3px 10px; border-radius: 999px;
-      border: 0.5px solid var(--border2); color: var(--text2);
-      background: var(--bg2);
-    }
-    .pill b { color: var(--text); font-weight: 600; }
-
-    .tabs {
-      display: flex; background: var(--bg);
-      border-bottom: 0.5px solid var(--border);
-    }
-    .tab-btn {
-      flex: 1; padding: 11px 0; font-size: 14px; font-weight: 500;
-      border: none; background: none; color: var(--text2); cursor: pointer;
-      border-bottom: 2px solid transparent; transition: all .15s;
-    }
+    /* TABS */
+    .tabs { display: flex; background: var(--bg); border-bottom: 0.5px solid var(--border2); }
+    .tab-btn { flex: 1; padding: 10px 0; font-size: 13px; font-weight: 500; border: none; background: none; color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; }
     .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-    .page { display: none; padding: 16px; }
+    /* TOOLBAR */
+    .toolbar { background: var(--bg); border-bottom: 0.5px solid var(--border); padding: 10px 12px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .toolbar-btn { font-size: 12px; padding: 5px 12px; border-radius: 999px; border: 0.5px solid var(--border2); background: var(--bg2); color: var(--text2); cursor: pointer; white-space: nowrap; }
+    .toolbar-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .toolbar-sep { flex: 1; }
+    .btn-reset { font-size: 12px; padding: 5px 12px; border-radius: 999px; border: 0.5px solid var(--red-border); color: var(--red-border); background: none; cursor: pointer; white-space: nowrap; }
+
+    /* PAGE */
+    .page { display: none; }
     .page.active { display: block; }
 
-    .mode-row {
-      display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap;
+    /* QUIZ TABLE */
+    .table-wrap { overflow-x: auto; }
+    table.quiz-tbl { width: 100%; border-collapse: collapse; font-size: 14px; }
+    table.quiz-tbl th { background: var(--bg); position: sticky; top: 0; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .4px; color: var(--text2); padding: 8px 10px; border-bottom: 1px solid var(--border2); text-align: left; z-index: 5; }
+    table.quiz-tbl td { padding: 4px 6px; border-bottom: 0.5px solid var(--border); vertical-align: middle; }
+    table.quiz-tbl tr:hover td { background: var(--bg3); }
+    .it-word { font-weight: 500; color: var(--text); padding: 6px 10px; }
+    .answer-inp {
+      width: 100%; font-size: 14px; padding: 5px 8px;
+      border: 1px solid transparent; border-radius: var(--radius);
+      background: transparent; color: var(--text); outline: none;
     }
-    .mode-btn {
-      font-size: 13px; padding: 5px 14px; border-radius: 999px;
-      border: 0.5px solid var(--border2); background: var(--bg);
-      color: var(--text2); cursor: pointer; transition: all .15s;
-    }
-    .mode-btn.active {
-      background: var(--accent); color: #fff; border-color: var(--accent);
-    }
+    .answer-inp:focus { border-color: var(--accent); background: var(--bg); }
+    .answer-inp.correct { background: var(--green-bg); color: var(--green-text); border-color: var(--green-border); }
+    .answer-inp.wrong { background: var(--red-bg); color: var(--red-text); border-color: var(--red-border); }
+    .check-cell { width: 36px; text-align: center; font-size: 16px; }
+    .row-num { width: 32px; font-size: 11px; color: var(--text2); text-align: center; }
 
-    .card {
-      background: var(--bg); border: 0.5px solid var(--border);
-      border-radius: var(--radius-lg); padding: 20px;
-    }
+    /* BOTTOM BAR */
+    .bottom-bar { position: sticky; bottom: 0; background: var(--bg); border-top: 0.5px solid var(--border2); padding: 10px 16px; display: flex; gap: 10px; align-items: center; justify-content: space-between; }
+    .btn-check-all { flex: 1; padding: 10px; font-size: 14px; font-weight: 600; background: var(--accent); color: #fff; border: none; border-radius: var(--radius); cursor: pointer; }
+    .btn-check-all:active { opacity: .85; }
 
-    .progress-text { font-size: 12px; color: var(--text2); margin-bottom: 12px; }
-    .progress-bar { height: 3px; background: var(--bg3); border-radius: 2px; margin-bottom: 18px; overflow: hidden; }
-    .progress-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width .3s; }
+    /* VOCAB PAGE */
+    .vocab-search { padding: 10px 12px; background: var(--bg); border-bottom: 0.5px solid var(--border); }
+    .vocab-search input { width: 100%; font-size: 14px; padding: 8px 12px; border: 1px solid var(--border2); border-radius: var(--radius); background: var(--bg2); color: var(--text); outline: none; }
+    .vocab-search input:focus { border-color: var(--accent); }
+    table.vocab-tbl { width: 100%; border-collapse: collapse; font-size: 14px; }
+    table.vocab-tbl th { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .4px; color: var(--text2); padding: 8px 12px; border-bottom: 1px solid var(--border2); text-align: left; background: var(--bg); position: sticky; top: 0; }
+    table.vocab-tbl td { padding: 9px 12px; border-bottom: 0.5px solid var(--border); }
 
-    .q-label { font-size: 13px; color: var(--text2); margin-bottom: 6px; }
-    .q-word { font-size: 30px; font-weight: 600; color: var(--text); margin-bottom: 20px; letter-spacing: -0.5px; }
-
-    .answer-input {
-      width: 100%; font-size: 17px; padding: 10px 14px;
-      border: 1px solid var(--border2); border-radius: var(--radius);
-      background: var(--bg2); color: var(--text); outline: none;
-      transition: border-color .15s, background .15s;
-    }
-    .answer-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(83,63,183,0.15); }
-    .answer-input.correct { border-color: var(--green-border); background: var(--green-bg); color: var(--green-text); }
-    .answer-input.wrong { border-color: var(--red-border); background: var(--red-bg); color: var(--red-text); }
-
-    .btn-row { display: flex; gap: 8px; margin-top: 12px; }
-    .btn {
-      flex: 1; padding: 11px; font-size: 15px; font-weight: 500;
-      border-radius: var(--radius); border: 1px solid var(--border2);
-      background: var(--bg); color: var(--text); cursor: pointer;
-      transition: all .15s;
-    }
-    .btn:active { transform: scale(0.97); }
-    .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-    .feedback { font-size: 14px; margin-top: 10px; min-height: 20px; }
-    .feedback.correct { color: var(--green-border); font-weight: 500; }
-    .feedback.wrong { color: var(--red-border); font-weight: 500; }
-    .hint { font-size: 13px; color: var(--text2); margin-top: 4px; }
-
-    .finished { text-align: center; padding: 30px 0; }
-    .finished .pct { font-size: 52px; font-weight: 700; color: var(--accent); }
-    .finished .sub { font-size: 15px; color: var(--text2); margin: 6px 0 24px; }
-
-    /* Vocabulary list */
-    .search-input {
-      width: 100%; font-size: 15px; padding: 9px 14px;
-      border: 1px solid var(--border2); border-radius: var(--radius);
-      background: var(--bg2); color: var(--text); outline: none;
-      margin-bottom: 12px;
-    }
-    .search-input:focus { border-color: var(--accent); }
-
-    .cat-filter { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
-    .cat-btn {
-      font-size: 12px; padding: 4px 12px; border-radius: 999px;
-      border: 0.5px solid var(--border); background: var(--bg);
-      color: var(--text2); cursor: pointer;
-    }
-    .cat-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-    .vocab-table { width: 100%; border-collapse: collapse; }
-    .vocab-table th {
-      font-size: 11px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: .5px; color: var(--text2); padding: 8px 10px;
-      border-bottom: 0.5px solid var(--border); text-align: left;
-    }
-    .vocab-table td { padding: 9px 10px; border-bottom: 0.5px solid var(--border); font-size: 14px; }
-    .vocab-table tr:last-child td { border-bottom: none; }
-    .badge {
-      font-size: 11px; padding: 2px 8px; border-radius: 999px;
-      background: var(--bg3); color: var(--text2); white-space: nowrap;
-    }
-
-    /* Stats page */
-    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
-    .stat-card {
-      background: var(--bg); border: 0.5px solid var(--border);
-      border-radius: var(--radius); padding: 14px;
-      display: flex; flex-direction: column; align-items: center; gap: 4px;
-    }
+    /* STATS PAGE */
+    .stats-wrap { padding: 14px; }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+    .stat-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 14px; text-align: center; }
     .stat-card .val { font-size: 28px; font-weight: 700; color: var(--accent); }
-    .stat-card .lbl { font-size: 12px; color: var(--text2); }
-
-    .session-list { list-style: none; }
-    .session-list li {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 10px 0; border-bottom: 0.5px solid var(--border); font-size: 14px;
-    }
-    .session-list li:last-child { border-bottom: none; }
-    .session-list .date { color: var(--text2); font-size: 12px; }
-    .session-list .pct-badge {
-      font-size: 12px; padding: 2px 10px; border-radius: 999px;
-      background: var(--bg3); color: var(--text); font-weight: 600;
-    }
+    .stat-card .lbl { font-size: 12px; color: var(--text2); margin-top: 4px; }
+    .hist-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 14px; }
+    .hist-card h3 { font-size: 13px; font-weight: 600; color: var(--text2); margin-bottom: 12px; }
+    .hist-list { list-style: none; }
+    .hist-list li { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 0.5px solid var(--border); font-size: 13px; }
+    .hist-list li:last-child { border-bottom: none; }
+    .hist-date { color: var(--text2); font-size: 12px; }
+    .pct-badge { font-size: 12px; padding: 2px 10px; border-radius: 999px; background: var(--accent-light); color: var(--accent); font-weight: 600; }
   </style>
 </head>
 <body>
 
 <header>
   <h1>🇮🇹 Ιταλικό Λεξιλόγιο</h1>
-  <div class="score-bar">
-    <div class="pill">✓ <b id="hdr-correct">0</b></div>
-    <div class="pill">✗ <b id="hdr-wrong">0</b></div>
+  <div class="score-pills">
+    <div class="pill green">✓ <b id="hdr-ok">0</b></div>
+    <div class="pill red">✗ <b id="hdr-ko">0</b></div>
+    <div class="pill"><b id="hdr-pct">—</b></div>
   </div>
 </header>
 
@@ -219,23 +124,37 @@
 
 <!-- QUIZ PAGE -->
 <div id="page-quiz" class="page active">
-  <div class="mode-row">
-    <button class="mode-btn active" id="m-it-gr" onclick="setMode('it-gr')">🇮🇹→🇬🇷</button>
-    <button class="mode-btn" id="m-gr-it" onclick="setMode('gr-it')">🇬🇷→🇮🇹</button>
-    <button class="mode-btn" id="m-mixed" onclick="setMode('mixed')">Μεικτό</button>
+  <div class="toolbar">
+    <button class="toolbar-btn active" id="dir-gr" onclick="setDir('gr')">🇮🇹→🇬🇷 Ελληνικά</button>
+    <button class="toolbar-btn" id="dir-it" onclick="setDir('it')">🇬🇷→🇮🇹 Ιταλικά</button>
+    <div class="toolbar-sep"></div>
+    <button class="btn-reset" onclick="resetQuiz()">↺ Καθαρισμός</button>
   </div>
-  <div class="card">
-    <div id="quiz-inner"></div>
+  <div class="table-wrap">
+    <table class="quiz-tbl">
+      <thead><tr>
+        <th class="row-num">#</th>
+        <th id="col-q">Ιταλικά</th>
+        <th id="col-a">Απάντηση (Ελληνικά)</th>
+        <th style="width:36px"></th>
+      </tr></thead>
+      <tbody id="quiz-body"></tbody>
+    </table>
+  </div>
+  <div class="bottom-bar">
+    <div style="font-size:13px;color:var(--text2);" id="bottom-info">Γράψε τις απαντήσεις και πάτα Έλεγχος</div>
+    <button class="btn-check-all" onclick="checkAll()">Έλεγχος ✓</button>
   </div>
 </div>
 
 <!-- VOCAB PAGE -->
 <div id="page-vocab" class="page">
-  <input class="search-input" id="search" type="search" placeholder="Αναζήτηση..." oninput="renderVocab()" />
-  <div class="cat-filter" id="cat-filter"></div>
-  <div class="card" style="padding:0;overflow:hidden;">
-    <table class="vocab-table">
-      <thead><tr><th>Ιταλικά</th><th>Ελληνικά</th><th>Κατηγορία</th></tr></thead>
+  <div class="vocab-search">
+    <input type="search" placeholder="Αναζήτηση..." id="vsearch" oninput="renderVocab()" />
+  </div>
+  <div class="table-wrap">
+    <table class="vocab-tbl">
+      <thead><tr><th>#</th><th>Ιταλικά</th><th>Ελληνικά</th></tr></thead>
       <tbody id="vocab-body"></tbody>
     </table>
   </div>
@@ -243,270 +162,246 @@
 
 <!-- STATS PAGE -->
 <div id="page-stats" class="page">
-  <div class="stats-grid">
-    <div class="stat-card"><span class="val" id="st-total">0</span><span class="lbl">Συνολικές απαντήσεις</span></div>
-    <div class="stat-card"><span class="val" id="st-pct">0%</span><span class="lbl">Ποσοστό επιτυχίας</span></div>
-    <div class="stat-card"><span class="val" id="st-sessions">0</span><span class="lbl">Συνεδρίες</span></div>
-    <div class="stat-card"><span class="val" id="st-streak">0</span><span class="lbl">Καλύτερο σκορ %</span></div>
+  <div class="stats-wrap">
+    <div class="stats-grid">
+      <div class="stat-card"><div class="val" id="st-total">—</div><div class="lbl">Συνολικές απαντήσεις</div></div>
+      <div class="stat-card"><div class="val" id="st-pct">—</div><div class="lbl">Ποσοστό επιτυχίας</div></div>
+      <div class="stat-card"><div class="val" id="st-sessions">0</div><div class="lbl">Συνεδρίες</div></div>
+      <div class="stat-card"><div class="val" id="st-best">—</div><div class="lbl">Καλύτερο σκορ</div></div>
+    </div>
+    <div class="hist-card">
+      <h3>Ιστορικό</h3>
+      <ul class="hist-list" id="hist-list"><li style="color:var(--text2)">Δεν υπάρχουν ακόμα συνεδρίες.</li></ul>
+    </div>
+    <button onclick="clearStats()" style="margin-top:12px;width:100%;padding:10px;border-radius:var(--radius);border:0.5px solid var(--red-border);color:var(--red-border);background:none;cursor:pointer;font-size:13px;">Εκκαθάριση στατιστικών</button>
   </div>
-  <div class="card">
-    <p style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:12px;">Ιστορικό συνεδριών</p>
-    <ul class="session-list" id="session-list"><li style="color:var(--text2);font-size:14px;">Δεν υπάρχουν ακόμα συνεδρίες.</li></ul>
-  </div>
-  <button class="btn" style="margin-top:12px;width:100%;color:var(--red-border);border-color:var(--red-border);" onclick="clearStats()">Εκκαθάριση στατιστικών</button>
 </div>
 
 <script>
 const vocab = [
-  {it:"ciao",gr:"γεια σου / χαίρετε",cat:"χαιρετισμοί"},
-  {it:"buongiorno",gr:"καλημέρα",cat:"χαιρετισμοί"},
-  {it:"buonasera",gr:"καλησπέρα",cat:"χαιρετισμοί"},
-  {it:"buonanotte",gr:"καληνύχτα",cat:"χαιρετισμοί"},
-  {it:"arrivederci",gr:"αντίο",cat:"χαιρετισμοί"},
-  {it:"per favore",gr:"παρακαλώ",cat:"βασικές λέξεις"},
-  {it:"grazie",gr:"ευχαριστώ",cat:"βασικές λέξεις"},
-  {it:"prego",gr:"παρακαλώ / τίποτα",cat:"βασικές λέξεις"},
-  {it:"scusa",gr:"συγγνώμη",cat:"βασικές λέξεις"},
-  {it:"sì",gr:"ναι",cat:"βασικές λέξεις"},
-  {it:"no",gr:"όχι",cat:"βασικές λέξεις"},
-  {it:"casa",gr:"σπίτι",cat:"ουσιαστικά"},
-  {it:"acqua",gr:"νερό",cat:"ουσιαστικά"},
-  {it:"pane",gr:"ψωμί",cat:"ουσιαστικά"},
-  {it:"libro",gr:"βιβλίο",cat:"ουσιαστικά"},
-  {it:"tavolo",gr:"τραπέζι",cat:"ουσιαστικά"},
-  {it:"porta",gr:"πόρτα",cat:"ουσιαστικά"},
-  {it:"finestra",gr:"παράθυρο",cat:"ουσιαστικά"},
-  {it:"amico",gr:"φίλος",cat:"ουσιαστικά"},
-  {it:"famiglia",gr:"οικογένεια",cat:"ουσιαστικά"},
-  {it:"lavoro",gr:"δουλειά / εργασία",cat:"ουσιαστικά"},
-  {it:"grande",gr:"μεγάλος",cat:"επίθετα"},
-  {it:"piccolo",gr:"μικρός",cat:"επίθετα"},
-  {it:"bello",gr:"ωραίος / όμορφος",cat:"επίθετα"},
-  {it:"buono",gr:"καλός",cat:"επίθετα"},
-  {it:"nuovo",gr:"νέος / καινούργιος",cat:"επίθετα"},
-  {it:"vecchio",gr:"παλιός / γέρος",cat:"επίθετα"},
-  {it:"essere",gr:"είμαι",cat:"ρήματα"},
-  {it:"avere",gr:"έχω",cat:"ρήματα"},
-  {it:"fare",gr:"κάνω",cat:"ρήματα"},
-  {it:"andare",gr:"πηγαίνω",cat:"ρήματα"},
-  {it:"venire",gr:"έρχομαι",cat:"ρήματα"},
-  {it:"mangiare",gr:"τρώω",cat:"ρήματα"},
-  {it:"bere",gr:"πίνω",cat:"ρήματα"},
-  {it:"parlare",gr:"μιλώ",cat:"ρήματα"},
-  {it:"capire",gr:"καταλαβαίνω",cat:"ρήματα"},
-  {it:"uno",gr:"ένα",cat:"αριθμοί"},
-  {it:"due",gr:"δύο",cat:"αριθμοί"},
-  {it:"tre",gr:"τρία",cat:"αριθμοί"},
-  {it:"quattro",gr:"τέσσερα",cat:"αριθμοί"},
-  {it:"cinque",gr:"πέντε",cat:"αριθμοί"},
-  {it:"sei",gr:"έξι",cat:"αριθμοί"},
-  {it:"sette",gr:"επτά",cat:"αριθμοί"},
-  {it:"otto",gr:"οκτώ",cat:"αριθμοί"},
-  {it:"nove",gr:"εννέα",cat:"αριθμοί"},
-  {it:"dieci",gr:"δέκα",cat:"αριθμοί"},
-  {it:"lunedì",gr:"Δευτέρα",cat:"μέρες"},
-  {it:"martedì",gr:"Τρίτη",cat:"μέρες"},
-  {it:"mercoledì",gr:"Τετάρτη",cat:"μέρες"},
-  {it:"giovedì",gr:"Πέμπτη",cat:"μέρες"},
-  {it:"venerdì",gr:"Παρασκευή",cat:"μέρες"},
-  {it:"sabato",gr:"Σάββατο",cat:"μέρες"},
-  {it:"domenica",gr:"Κυριακή",cat:"μέρες"},
-  {it:"rosso",gr:"κόκκινο",cat:"χρώματα"},
-  {it:"blu",gr:"μπλε",cat:"χρώματα"},
-  {it:"verde",gr:"πράσινο",cat:"χρώματα"},
-  {it:"giallo",gr:"κίτρινο",cat:"χρώματα"},
-  {it:"bianco",gr:"άσπρο",cat:"χρώματα"},
-  {it:"nero",gr:"μαύρο",cat:"χρώματα"},
-  {it:"pizza",gr:"πίτσα",cat:"φαγητό"},
-  {it:"pasta",gr:"ζυμαρικά",cat:"φαγητό"},
-  {it:"caffè",gr:"καφές",cat:"φαγητό"},
-  {it:"vino",gr:"κρασί",cat:"φαγητό"},
-  {it:"gelato",gr:"παγωτό",cat:"φαγητό"},
-  {it:"formaggio",gr:"τυρί",cat:"φαγητό"},
+  {it:"Sopra",gr:"Πάνω"},{it:"Su",gr:"Πάνω"},{it:"Sotto",gr:"Κάτω"},{it:"Dentro",gr:"Μέσα"},
+  {it:"Accanto a",gr:"Δίπλα σε"},{it:"Vicino a",gr:"Κοντά σε"},{it:"Davanti a",gr:"Μπροστά σε"},
+  {it:"Dietro",gr:"Πίσω"},{it:"Tra",gr:"Ανάμεσα σε - Μεταξύ"},{it:"Fra",gr:"Ανάμεσα σε - Μεταξύ"},
+  {it:"In mezzo a",gr:"Στη μέση"},{it:"Intorno a",gr:"Γύρω από"},{it:"Lontano da",gr:"Μακρυά από"},
+  {it:"Buongiorno",gr:"Καλημέρα"},{it:"Buonasera",gr:"Καλησπέρα"},{it:"Ciao - Salve",gr:"Γεια - Χαίρετε"},
+  {it:"Piacere",gr:"Χαίρω πολύ"},{it:"Come stai?",gr:"Πώς είσαι;"},{it:"Arrivederci",gr:"Αντίο - Εις το επανιδείν"},
+  {it:"Alto - Basso",gr:"Ψηλός - Κοντός"},{it:"Magro - Grasso",gr:"Αδύνατος - Χοντρός"},
+  {it:"Biondo - Bruno",gr:"Ξανθός - Μελαχρινός"},{it:"Simpatico - Antipatico",gr:"Συμπαθητικός - Αντιπαθητικός"},
+  {it:"Allegro - Triste",gr:"Χαρούμενος - Λυπημένος"},{it:"I capelli - Gli occhi",gr:"Τα μαλλιά - Τα μάτια"},
+  {it:"Tempo libero",gr:"Ελεύθερος χρόνος"},{it:"Ascoltare musica",gr:"Να ακούς μουσική"},
+  {it:"Leggere un libro",gr:"Να διαβάζεις βιβλίο"},{it:"Andare al cinema - a teatro",gr:"Να πας στον κινηματογράφο - στο θέατρο"},
+  {it:"Andare in palestra",gr:"Να πας στο γυμναστήριο"},{it:"Uscire con gli amici",gr:"Να βγεις με φίλους"},
+  {it:"Appartamento",gr:"Διαμέρισμα"},{it:"Ingresso",gr:"Είσοδος - Χολ"},{it:"Soggiorno - Salotto",gr:"Σαλόνι"},
+  {it:"Camera da letto",gr:"Υπνοδωμάτιο"},{it:"Cucina",gr:"Κουζίνα"},{it:"Bagno",gr:"Μπάνιο"},
+  {it:"Balcone",gr:"Μπαλκόνι"},{it:"Autobus - Metro - Tram",gr:"Λεωφορείο - Μετρό - Τραμ"},
+  {it:"Biglietto",gr:"Εισιτήριο"},{it:"Messaggio - Email",gr:"Μήνυμα - Email"},
+  {it:"Computer - Tablet",gr:"Υπολογιστής - Tablet"},{it:"Chiamarsi",gr:"Λέγομαι - Ονομάζομαι"},
+  {it:"Essere",gr:"Είμαι"},{it:"Avere",gr:"Έχω"},{it:"Lavorare",gr:"Εργάζομαι - Δουλεύω"},
+  {it:"Prendere",gr:"Παίρνω"},{it:"Aprire",gr:"Ανοίγω"},{it:"Finire",gr:"Τελειώνω"},
+  {it:"Abitare",gr:"Κατοικώ - Μένω"},{it:"Studiare",gr:"Σπουδάζω - Διαβάζω"},
+  {it:"Sapere",gr:"Ξέρω - Γνωρίζω"},{it:"Uscire",gr:"Βγαίνω"},{it:"Fare",gr:"Κάνω"},
+  {it:"Mangiare",gr:"Τρώω"},{it:"Vedere",gr:"Βλέπω"},{it:"Nome",gr:"Όνομα"},
+  {it:"Età",gr:"Ηλικία"},{it:"Nazionalità",gr:"Εθνικότητα"},{it:"Straniero - Straniera",gr:"Ξένος - Ξένη"},
+  {it:"Di dove sei?",gr:"Από που είσαι;"},{it:"Quanti anni hai?",gr:"Πόσων χρόνων είσαι;"},
+  {it:"Dove abiti?",gr:"Που μένεις;"},{it:"Forma di cortesia",gr:"Ευγενική μορφή (τύπος ευγενείας)"},
+  {it:"Che ora è? - Che ore sono?",gr:"Τι ώρα είναι;"},{it:"Mezzogiorno",gr:"Μεσημέρι"},
+  {it:"Mezzanotte",gr:"Μεσάνυχτα"},{it:"Un quarto",gr:"Ένα τέταρτο"},{it:"Mattina",gr:"Πρωϊ"},
+  {it:"Pomeriggio",gr:"Απόγευμα"},{it:"Sera",gr:"Βράδυ - Απόγευμα"},{it:"Fine settimana",gr:"Σαββατοκύριακο"},
+  {it:"I giorni della settimana",gr:"Οι ημέρες της εβδομάδας"},{it:"Chiave - Chiavi",gr:"Κλειδί - Κλειδιά"},
+  {it:"Borsa",gr:"Τσάντα"},{it:"Zaino",gr:"Σακίδιο"},{it:"Libro",gr:"Βιβλίο"},
+  {it:"Gatto",gr:"Γάτα"},{it:"Cane",gr:"Σκύλος"},{it:"Macchina",gr:"Αυτοκίνητο"},
+  {it:"Tavolo",gr:"Τραπέζι"},{it:"Invitare qualcuno",gr:"Να προσκαλέσεις κάποιον"},
+  {it:"Accettare un invito",gr:"Να αποδεχτείς μια πρόσκληση"},{it:"Rifiutare un invito",gr:"Να αρνηθείς μια πρόσκληση"},
+  {it:"Volentieri",gr:"Ευχαρίστως"},{it:"Purtroppo non posso",gr:"Δυστυχώς δεν μπορώ"},
+  {it:"Mi dispiace",gr:"Λυπάμαι - Με συγχωρείς"},{it:"Appuntamento",gr:"Ραντεβού"},
+  {it:"Periferia",gr:"Περιφέρεια - Προάστιο"},{it:"Centro",gr:"Κέντρο"},
+  {it:"Affitto",gr:"Ενοίκιο"},{it:"Ascensore",gr:"Ανελκυστήρας - Ασανσέρ"},
+  {it:"Primo",gr:"Πρώτος"},{it:"Secondo",gr:"Δεύτερος"},{it:"Terzo",gr:"Τρίτος"},
+  {it:"Quarto",gr:"Τέταρτος"},{it:"Quinto",gr:"Πέμπτος"},{it:"Sesto",gr:"Έκτος"},
+  {it:"Settimo",gr:"Έβδομος"},{it:"Ottavo",gr:"Όγδοος"},{it:"Nono",gr:"Ένατος"},
+  {it:"Decimo",gr:"Δέκατος"},{it:"Comodo",gr:"Άνετος - Βολικός"},{it:"Luminoso",gr:"Φωτεινός"},
+  {it:"Passeggero",gr:"Επιβάτης"},{it:"Tabaccheria",gr:"Καπνοπωλείο - Περίπτερο"},
+  {it:"Edicola",gr:"Περίπτερο εφημερίδων"},{it:"Macchinette automatiche",gr:"Αυτόματες μηχανές"},
+  {it:"Abbonamento",gr:"Συνδρομή - Μηνιαίο εισιτήριο"},{it:"Cellulare",gr:"Κινητό τηλέφωνο"},
+  {it:"Convalidare",gr:"Επικυρώνω"},{it:"Timbrare",gr:"Χτυπάω κάρτα - εισιτήριο"},
+  {it:"Inizio della corsa",gr:"Αρχή της διαδρομής"},{it:"Stazione",gr:"Σταθμός"},
+  {it:"Salire",gr:"Ανεβαίνω - Επιβιβάζομαι"},{it:"Scendere",gr:"Κατεβαίνω - Αποβιβάζομαι"},
+  {it:"Famiglia",gr:"Οικογένεια"},{it:"Piscina",gr:"Πισίνα"},{it:"Partita a carte",gr:"Παιχνίδι με χαρτιά"},
+  {it:"Tango",gr:"Τάνγκο"},{it:"Camminare",gr:"Περπατώ"},{it:"Correre",gr:"Τρέχω"},
+  {it:"Bicicletta",gr:"Ποδήλατο"},{it:"Social media",gr:"Μέσα κοινωνικής δικτύωσης"},
+  {it:"Lettura",gr:"Ανάγνωση"},{it:"Giardinaggio",gr:"Κηπουρική"},{it:"Amici",gr:"Φίλοι"},
+  {it:"Inviare un video",gr:"Να στείλεις βίντεο"},{it:"Computer - Portatile",gr:"Υπολογιστής - Laptop"},
+  {it:"Server",gr:"Διακομιστής"},{it:"Tecnico",gr:"Τεχνικός"},{it:"Pausa pranzo",gr:"Διάλειμμα μεσημεριανού"},
+  {it:"Posta",gr:"Ταχυδρομείο - Αλληλογραφία"},{it:"Messaggio",gr:"Μήνυμα"},
+  {it:"Figurati",gr:"Μην το λες - Παρακαλώ (δεν χρειάζεται)"},{it:"Ultima fermata",gr:"Τελευταία στάση"},
+  {it:"Quadro",gr:"Πίνακας ζωγραφικής"},{it:"Pianta",gr:"Φυτό - Κάτοψη"},
+  {it:"Divano",gr:"Καναπές"},{it:"Poltrona",gr:"Πολυθρόνα"},{it:"Libreria",gr:"Βιβλιοθήκη"},
+  {it:"Scaffale",gr:"Ράφι"},{it:"Lampada",gr:"Λάμπα - Φωτιστικό"},{it:"Letto",gr:"Κρεβάτι"},
+  {it:"Sedia",gr:"Καρέκλα"},{it:"Tavolino",gr:"Τραπεζάκι"},{it:"Scrivania",gr:"Γραφείο"},
+  {it:"Tappeto",gr:"Χαλί"},{it:"Armadio",gr:"Ντουλάπα"},{it:"Tende",gr:"Κουρτίνες"},
+  {it:"Specchio",gr:"Καθρέπτης"},{it:"Televisione",gr:"Τηλεόραση"},{it:"Cuscino",gr:"Μαξιλάρι"},
+  {it:"andare",gr:"πηγαίνω"},{it:"venire",gr:"έρχομαι"},{it:"partire",gr:"αναχωρώ"},
+  {it:"arrivare",gr:"φτάνω"},{it:"ritornare",gr:"επιστρέφω"},{it:"entrare",gr:"μπαίνω"},
+  {it:"cadere",gr:"πέφτω"},{it:"rimanere",gr:"μένω - παραμένω"},{it:"restare",gr:"μένω - μένω πίσω"},
+  {it:"stare",gr:"είμαι - βρίσκομαι"},{it:"nascere",gr:"γεννιέμαι"},{it:"morire",gr:"πεθαίνω"},
+  {it:"diventare",gr:"γίνομαι"},{it:"riuscire",gr:"καταφέρνω"},{it:"costare",gr:"κοστίζω"},
+  {it:"piacere",gr:"αρέσω"},{it:"succedere",gr:"συμβαίνω"},{it:"mancare",gr:"λείπω - μου λείπει"},
+  {it:"durare",gr:"διαρκώ"},{it:"sembrare",gr:"φαίνομαι - μοιάζω"},{it:"bastare",gr:"αρκώ"},
+  {it:"ascendere",gr:"ανέρχομαι"},{it:"scendere",gr:"κατεβαίνω"},{it:"spendere",gr:"ξοδεύω"},
+  {it:"chiudere",gr:"κλείνω"},{it:"decidere",gr:"αποφασίζω"},{it:"ridere",gr:"γελώ"},
+  {it:"mettere",gr:"βάζω"},{it:"promettere",gr:"υπόσχομαι"},{it:"discutere",gr:"συζητώ - διαφωνώ"},
+  {it:"correggere",gr:"διορθώνω"},{it:"leggere",gr:"διαβάζω"},{it:"stringere",gr:"σφίγγω"},
+  {it:"esprimere",gr:"εκφράζω"},{it:"estendere",gr:"εκτείνω - επεκτείνω"},
+  {it:"rendere",gr:"κάνω - αποδίδω"},{it:"cogliere",gr:"μαζεύω - συλλαμβάνω"},
+  {it:"scrivere",gr:"γράφω"},{it:"dire",gr:"λέω"},{it:"rompere",gr:"σπάω"},
+  {it:"tradurre",gr:"μεταφράζω"},{it:"giungere",gr:"φτάνω"},{it:"piangere",gr:"κλαίω"},
+  {it:"spegnere",gr:"σβήνω"},{it:"chiedere",gr:"ζητώ - ρωτώ"},{it:"porre",gr:"θέτω - τοποθετώ"},
+  {it:"rispondere",gr:"απαντώ"},{it:"vincere",gr:"κερδίζω"},{it:"mungere",gr:"αρμέγω"},
+  {it:"scegliere",gr:"επιλέγω"},{it:"commuovere",gr:"συγκινώ"},{it:"rivolgere",gr:"απευθύνω"},
+  {it:"coprire",gr:"καλύπτω"},{it:"offrire",gr:"προσφέρω"},{it:"comparire",gr:"εμφανίζομαι"},
+  {it:"perdere",gr:"χάνω"},{it:"vivere",gr:"ζω"},{it:"bere",gr:"πίνω"},
+  {it:"persuadere",gr:"πείθω"}
 ];
 
-let mode = 'it-gr';
-let queue = [];
-let current = null;
-let correctCount = 0;
-let wrongCount = 0;
-let answered = false;
-let activeCat = 'all';
+let direction = 'gr'; // 'gr' = it→gr, 'it' = gr→it
 
-// Stats from localStorage
-function loadStats() {
-  try { return JSON.parse(localStorage.getItem('italiano_stats') || '{"total":0,"correct":0,"sessions":[]}'); }
-  catch(e) { return {total:0,correct:0,sessions:[]}; }
-}
-function saveStats(s) { localStorage.setItem('italiano_stats', JSON.stringify(s)); }
-
-function normalize(s) {
+function norm(s) {
   return s.toLowerCase()
-    .replace(/[àáâã]/g,'a').replace(/[èéêë]/g,'e')
-    .replace(/[ìíîï]/g,'i').replace(/[òóôõ]/g,'o')
-    .replace(/[ùúûü]/g,'u')
-    .replace(/\s*\/\s*/g,'/').trim();
+    .replace(/[αά]/g,'α').replace(/[εέ]/g,'ε').replace(/[ηή]/g,'η')
+    .replace(/[ιίϊΐ]/g,'ι').replace(/[οό]/g,'ο').replace(/[υύϋΰ]/g,'υ').replace(/[ωώ]/g,'ω')
+    .replace(/[àáâ]/g,'a').replace(/[èéê]/g,'e').replace(/[ìíî]/g,'i')
+    .replace(/[òóô]/g,'o').replace(/[ùúû]/g,'u')
+    .replace(/\s*-\s*/g,' - ').trim();
 }
-function checkAnswer(input, correct) {
-  const n = normalize(input);
-  return correct.split('/').map(v => normalize(v.trim())).some(v => v === n);
-}
-function shuffle(a) {
-  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
-  return a;
+function isCorrect(input, correct) {
+  const n = norm(input);
+  return correct.split('-').map(p => norm(p.trim())).some(p => p === n) ||
+         norm(correct) === n;
 }
 
-function setMode(m) {
-  mode = m;
-  ['it-gr','gr-it','mixed'].forEach(x => document.getElementById('m-'+x).classList.toggle('active', x===m));
-  startQuiz();
+function setDir(d) {
+  direction = d;
+  document.getElementById('dir-gr').classList.toggle('active', d==='gr');
+  document.getElementById('dir-it').classList.toggle('active', d==='it');
+  document.getElementById('col-q').textContent = d==='gr' ? 'Ιταλικά' : 'Ελληνικά';
+  document.getElementById('col-a').textContent = d==='gr' ? 'Απάντηση (Ελληνικά)' : 'Απάντηση (Ιταλικά)';
+  renderQuiz();
 }
 
-function startQuiz() {
-  queue = shuffle([...vocab]);
-  correctCount = 0; wrongCount = 0;
-  updateHeader();
-  nextQ();
+function renderQuiz() {
+  const tbody = document.getElementById('quiz-body');
+  tbody.innerHTML = vocab.map((v,i) => {
+    const q = direction==='gr' ? v.it : v.gr;
+    return `<tr>
+      <td class="row-num">${i+1}</td>
+      <td class="it-word">${q}</td>
+      <td><input class="answer-inp" id="inp-${i}" type="text" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="handleKey(event,${i})" /></td>
+      <td class="check-cell" id="chk-${i}"></td>
+    </tr>`;
+  }).join('');
+  updateHeader(0,0);
 }
 
-function updateHeader() {
-  document.getElementById('hdr-correct').textContent = correctCount;
-  document.getElementById('hdr-wrong').textContent = wrongCount;
-}
-
-function nextQ() {
-  if (!queue.length) { showFinished(); return; }
-  answered = false;
-  current = queue.pop();
-  const isItGr = mode==='it-gr' || (mode==='mixed' && Math.random()>0.5);
-  current._dir = isItGr ? 'it-gr' : 'gr-it';
-  const done = vocab.length - queue.length;
-  const pct = Math.round(done/vocab.length*100);
-  document.getElementById('quiz-inner').innerHTML = `
-    <p class="progress-text">${done} / ${vocab.length}</p>
-    <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
-    <p class="q-label">${isItGr ? 'Μετάφρασε στα ελληνικά:' : 'Μετάφρασε στα ιταλικά:'}</p>
-    <p class="q-word">${isItGr ? current.it : current.gr}</p>
-    <input class="answer-input" id="ans" type="text" placeholder="${isItGr ? 'ελληνικά...' : 'italiano...'}" autocomplete="off" />
-    <div class="feedback" id="fb"></div>
-    <p class="hint" id="hint"></p>
-    <div class="btn-row">
-      <button class="btn primary" id="btn-main" onclick="doCheck()">Έλεγχος</button>
-    </div>
-  `;
-  const inp = document.getElementById('ans');
-  inp.addEventListener('keydown', e => { if(e.key==='Enter') answered ? nextQ() : doCheck(); });
-  inp.focus();
-}
-
-function doCheck() {
-  if(answered) return;
-  answered = true;
-  const inp = document.getElementById('ans');
-  const val = inp.value.trim();
-  const correct = current._dir==='it-gr' ? current.gr : current.it;
-  const ok = checkAnswer(val, correct);
-  if(ok) {
-    correctCount++;
-    inp.classList.add('correct');
-    document.getElementById('fb').textContent = '✓ Σωστό!';
-    document.getElementById('fb').className = 'feedback correct';
-  } else {
-    wrongCount++;
-    inp.classList.add('wrong');
-    document.getElementById('fb').textContent = '✗ Λάθος';
-    document.getElementById('fb').className = 'feedback wrong';
-    document.getElementById('hint').textContent = 'Σωστό: ' + correct;
+function handleKey(e, i) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    const next = document.getElementById('inp-'+(i+1));
+    if (next) next.focus();
   }
-  updateHeader();
-  document.getElementById('btn-main').textContent = 'Επόμενο →';
-  document.getElementById('btn-main').onclick = nextQ;
 }
 
-function showFinished() {
-  const total = vocab.length;
-  const pct = Math.round(correctCount/total*100);
-  const msg = pct>=80 ? 'Bravissima! 🎉' : pct>=50 ? 'Καλή προσπάθεια! 💪' : 'Συνέχισε την εξάσκηση! 📚';
-  // Save session
-  const stats = loadStats();
-  stats.total += total;
-  stats.correct += correctCount;
-  stats.sessions.unshift({date: new Date().toLocaleDateString('el-GR'), correct: correctCount, total, pct});
-  if(stats.sessions.length > 20) stats.sessions.pop();
-  saveStats(stats);
-  document.getElementById('quiz-inner').innerHTML = `
-    <div class="finished">
-      <div class="pct">${pct}%</div>
-      <p class="sub">${correctCount} σωστά από ${total} &nbsp;·&nbsp; ${msg}</p>
-      <div class="btn-row" style="justify-content:center;gap:10px;">
-        <button class="btn primary" onclick="startQuiz()" style="flex:none;padding:11px 28px;">Ξανά</button>
-      </div>
-    </div>
-  `;
+function checkAll() {
+  let ok = 0, ko = 0;
+  vocab.forEach((v,i) => {
+    const inp = document.getElementById('inp-'+i);
+    const val = inp.value.trim();
+    if (!val) { inp.classList.remove('correct','wrong'); document.getElementById('chk-'+i).textContent=''; return; }
+    const correct = direction==='gr' ? v.gr : v.it;
+    if (isCorrect(val, correct)) {
+      inp.classList.add('correct'); inp.classList.remove('wrong');
+      document.getElementById('chk-'+i).textContent = '✓';
+      ok++;
+    } else {
+      inp.classList.add('wrong'); inp.classList.remove('correct');
+      document.getElementById('chk-'+i).textContent = '✗';
+      ko++;
+    }
+  });
+  updateHeader(ok, ko);
+  saveSession(ok, ko);
+  document.getElementById('bottom-info').textContent = `${ok} σωστά · ${ko} λάθη · ${vocab.length - ok - ko} κενά`;
 }
 
-// ---- VOCAB ----
+function updateHeader(ok, ko) {
+  document.getElementById('hdr-ok').textContent = ok;
+  document.getElementById('hdr-ko').textContent = ko;
+  const total = ok + ko;
+  document.getElementById('hdr-pct').textContent = total > 0 ? Math.round(ok/total*100)+'%' : '—';
+}
+
+function resetQuiz() {
+  vocab.forEach((_,i) => {
+    const inp = document.getElementById('inp-'+i);
+    inp.value = ''; inp.classList.remove('correct','wrong');
+    document.getElementById('chk-'+i).textContent = '';
+  });
+  updateHeader(0,0);
+  document.getElementById('bottom-info').textContent = 'Γράψε τις απαντήσεις και πάτα Έλεγχος';
+  document.getElementById('inp-0')?.focus();
+}
+
+// VOCAB
 function renderVocab() {
-  const q = (document.getElementById('search')?.value || '').toLowerCase();
-  const tbody = document.getElementById('vocab-body');
-  tbody.innerHTML = vocab
-    .filter(v => (activeCat==='all' || v.cat===activeCat) && (!q || v.it.includes(q) || v.gr.includes(q)))
-    .map(v => `<tr><td>${v.it}</td><td>${v.gr}</td><td><span class="badge">${v.cat}</span></td></tr>`)
+  const q = (document.getElementById('vsearch')?.value||'').toLowerCase();
+  document.getElementById('vocab-body').innerHTML = vocab
+    .filter(v => !q || v.it.toLowerCase().includes(q) || v.gr.toLowerCase().includes(q))
+    .map((v,i) => `<tr><td style="font-size:11px;color:var(--text2);text-align:center;">${i+1}</td><td style="font-weight:500">${v.it}</td><td>${v.gr}</td></tr>`)
     .join('');
 }
 
-function buildCatFilter() {
-  const cats = ['all', ...new Set(vocab.map(v=>v.cat))];
-  const el = document.getElementById('cat-filter');
-  el.innerHTML = cats.map(c => `<button class="cat-btn${c==='all'?' active':''}" onclick="setCat('${c}')">${c==='all'?'Όλες':c}</button>`).join('');
+// STATS
+function loadStats() {
+  try { return JSON.parse(localStorage.getItem('it_stats')||'{"total":0,"correct":0,"sessions":[]}'); }
+  catch(e) { return {total:0,correct:0,sessions:[]}; }
 }
-
-function setCat(c) {
-  activeCat = c;
-  document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.textContent===(c==='all'?'Όλες':c)));
-  renderVocab();
+function saveSession(ok, ko) {
+  if (ok+ko === 0) return;
+  const s = loadStats();
+  s.total += ok+ko; s.correct += ok;
+  s.sessions.unshift({date:new Date().toLocaleDateString('el-GR'), ok, total:ok+ko, pct:Math.round(ok/(ok+ko)*100)});
+  if (s.sessions.length>20) s.sessions.pop();
+  localStorage.setItem('it_stats', JSON.stringify(s));
 }
-
-// ---- STATS ----
 function renderStats() {
   const s = loadStats();
-  document.getElementById('st-total').textContent = s.total;
-  document.getElementById('st-pct').textContent = s.total ? Math.round(s.correct/s.total*100)+'%' : '0%';
+  document.getElementById('st-total').textContent = s.total || '—';
+  document.getElementById('st-pct').textContent = s.total ? Math.round(s.correct/s.total*100)+'%' : '—';
   document.getElementById('st-sessions').textContent = s.sessions.length;
-  const best = s.sessions.length ? Math.max(...s.sessions.map(x=>x.pct)) : 0;
-  document.getElementById('st-streak').textContent = best+'%';
-  const ul = document.getElementById('session-list');
-  if(!s.sessions.length) { ul.innerHTML='<li style="color:var(--text2);font-size:14px;">Δεν υπάρχουν ακόμα συνεδρίες.</li>'; return; }
-  ul.innerHTML = s.sessions.map(x=>`
-    <li>
-      <span>${x.correct}/${x.total} σωστά <span class="date">${x.date}</span></span>
-      <span class="pct-badge">${x.pct}%</span>
-    </li>`).join('');
+  const best = s.sessions.length ? Math.max(...s.sessions.map(x=>x.pct)) : null;
+  document.getElementById('st-best').textContent = best !== null ? best+'%' : '—';
+  const ul = document.getElementById('hist-list');
+  ul.innerHTML = s.sessions.length
+    ? s.sessions.map(x=>`<li><span>${x.ok}/${x.total} σωστά <span class="hist-date">${x.date}</span></span><span class="pct-badge">${x.pct}%</span></li>`).join('')
+    : '<li style="color:var(--text2)">Δεν υπάρχουν ακόμα συνεδρίες.</li>';
 }
-
 function clearStats() {
-  if(confirm('Να διαγραφούν τα στατιστικά;')) { localStorage.removeItem('italiano_stats'); renderStats(); }
+  if(confirm('Να διαγραφούν τα στατιστικά;')) { localStorage.removeItem('it_stats'); renderStats(); }
 }
 
-// ---- NAVIGATION ----
 function showPage(p) {
-  document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-  document.getElementById('page-'+p).classList.add('active');
-  document.querySelectorAll('.tab-btn')[['quiz','vocab','stats'].indexOf(p)].classList.add('active');
+  ['quiz','vocab','stats'].forEach((x,i) => {
+    document.getElementById('page-'+x).classList.toggle('active', x===p);
+    document.querySelectorAll('.tab-btn')[i].classList.toggle('active', x===p);
+  });
   if(p==='vocab') renderVocab();
   if(p==='stats') renderStats();
 }
 
 // Init
-buildCatFilter();
+renderQuiz();
 renderVocab();
-startQuiz();
 
-// Register service worker
-if('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js').catch(()=>{});
-}
+if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
 </body>
 </html>
