@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ιταλικό Λεξιλόγιο</title>
+  <meta name="description" content="Εξάσκηση ιταλικού λεξιλογίου με ελληνική μετάφραση" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Italiano" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #ffffff;
+      --bg2: #f5f5f3;
+      --bg3: #ededea;
+      --text: #1a1a18;
+      --text2: #6b6b67;
+      --border: rgba(0,0,0,0.12);
+      --border2: rgba(0,0,0,0.22);
+      --radius: 10px;
+      --radius-lg: 14px;
+      --green-bg: #e1f5ee;
+      --green-text: #085041;
+      --green-border: #1D9E75;
+      --red-bg: #fcebeb;
+      --red-text: #501313;
+      --red-border: #e24b4a;
+      --accent: #533fb7;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #1c1c1a;
+        --bg2: #252523;
+        --bg3: #2f2f2c;
+        --text: #f0ede8;
+        --text2: #9a9a94;
+        --border: rgba(255,255,255,0.1);
+        --border2: rgba(255,255,255,0.2);
+        --green-bg: #04342c;
+        --green-text: #9fe1cb;
+        --green-border: #1D9E75;
+        --red-bg: #501313;
+        --red-text: #f7c1c1;
+        --red-border: #e24b4a;
+        --accent: #afa9ec;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg2);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 0 0 80px;
+    }
+
+    header {
+      background: var(--bg);
+      border-bottom: 0.5px solid var(--border);
+      padding: 14px 20px;
+      position: sticky; top: 0; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+
+    header h1 { font-size: 17px; font-weight: 600; }
+    header .flag { font-size: 22px; }
+
+    .score-bar {
+      display: flex; gap: 8px;
+    }
+    .pill {
+      font-size: 12px; padding: 3px 10px; border-radius: 999px;
+      border: 0.5px solid var(--border2); color: var(--text2);
+      background: var(--bg2);
+    }
+    .pill b { color: var(--text); font-weight: 600; }
+
+    .tabs {
+      display: flex; background: var(--bg);
+      border-bottom: 0.5px solid var(--border);
+    }
+    .tab-btn {
+      flex: 1; padding: 11px 0; font-size: 14px; font-weight: 500;
+      border: none; background: none; color: var(--text2); cursor: pointer;
+      border-bottom: 2px solid transparent; transition: all .15s;
+    }
+    .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+    .page { display: none; padding: 16px; }
+    .page.active { display: block; }
+
+    .mode-row {
+      display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap;
+    }
+    .mode-btn {
+      font-size: 13px; padding: 5px 14px; border-radius: 999px;
+      border: 0.5px solid var(--border2); background: var(--bg);
+      color: var(--text2); cursor: pointer; transition: all .15s;
+    }
+    .mode-btn.active {
+      background: var(--accent); color: #fff; border-color: var(--accent);
+    }
+
+    .card {
+      background: var(--bg); border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg); padding: 20px;
+    }
+
+    .progress-text { font-size: 12px; color: var(--text2); margin-bottom: 12px; }
+    .progress-bar { height: 3px; background: var(--bg3); border-radius: 2px; margin-bottom: 18px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--accent); border-radius: 2px; transition: width .3s; }
+
+    .q-label { font-size: 13px; color: var(--text2); margin-bottom: 6px; }
+    .q-word { font-size: 30px; font-weight: 600; color: var(--text); margin-bottom: 20px; letter-spacing: -0.5px; }
+
+    .answer-input {
+      width: 100%; font-size: 17px; padding: 10px 14px;
+      border: 1px solid var(--border2); border-radius: var(--radius);
+      background: var(--bg2); color: var(--text); outline: none;
+      transition: border-color .15s, background .15s;
+    }
+    .answer-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(83,63,183,0.15); }
+    .answer-input.correct { border-color: var(--green-border); background: var(--green-bg); color: var(--green-text); }
+    .answer-input.wrong { border-color: var(--red-border); background: var(--red-bg); color: var(--red-text); }
+
+    .btn-row { display: flex; gap: 8px; margin-top: 12px; }
+    .btn {
+      flex: 1; padding: 11px; font-size: 15px; font-weight: 500;
+      border-radius: var(--radius); border: 1px solid var(--border2);
+      background: var(--bg); color: var(--text); cursor: pointer;
+      transition: all .15s;
+    }
+    .btn:active { transform: scale(0.97); }
+    .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    .feedback { font-size: 14px; margin-top: 10px; min-height: 20px; }
+    .feedback.correct { color: var(--green-border); font-weight: 500; }
+    .feedback.wrong { color: var(--red-border); font-weight: 500; }
+    .hint { font-size: 13px; color: var(--text2); margin-top: 4px; }
+
+    .finished { text-align: center; padding: 30px 0; }
+    .finished .pct { font-size: 52px; font-weight: 700; color: var(--accent); }
+    .finished .sub { font-size: 15px; color: var(--text2); margin: 6px 0 24px; }
+
+    /* Vocabulary list */
+    .search-input {
+      width: 100%; font-size: 15px; padding: 9px 14px;
+      border: 1px solid var(--border2); border-radius: var(--radius);
+      background: var(--bg2); color: var(--text); outline: none;
+      margin-bottom: 12px;
+    }
+    .search-input:focus { border-color: var(--accent); }
+
+    .cat-filter { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+    .cat-btn {
+      font-size: 12px; padding: 4px 12px; border-radius: 999px;
+      border: 0.5px solid var(--border); background: var(--bg);
+      color: var(--text2); cursor: pointer;
+    }
+    .cat-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    .vocab-table { width: 100%; border-collapse: collapse; }
+    .vocab-table th {
+      font-size: 11px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .5px; color: var(--text2); padding: 8px 10px;
+      border-bottom: 0.5px solid var(--border); text-align: left;
+    }
+    .vocab-table td { padding: 9px 10px; border-bottom: 0.5px solid var(--border); font-size: 14px; }
+    .vocab-table tr:last-child td { border-bottom: none; }
+    .badge {
+      font-size: 11px; padding: 2px 8px; border-radius: 999px;
+      background: var(--bg3); color: var(--text2); white-space: nowrap;
+    }
+
+    /* Stats page */
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+    .stat-card {
+      background: var(--bg); border: 0.5px solid var(--border);
+      border-radius: var(--radius); padding: 14px;
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+    }
+    .stat-card .val { font-size: 28px; font-weight: 700; color: var(--accent); }
+    .stat-card .lbl { font-size: 12px; color: var(--text2); }
+
+    .session-list { list-style: none; }
+    .session-list li {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 0; border-bottom: 0.5px solid var(--border); font-size: 14px;
+    }
+    .session-list li:last-child { border-bottom: none; }
+    .session-list .date { color: var(--text2); font-size: 12px; }
+    .session-list .pct-badge {
+      font-size: 12px; padding: 2px 10px; border-radius: 999px;
+      background: var(--bg3); color: var(--text); font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🇮🇹 Ιταλικό Λεξιλόγιο</h1>
+  <div class="score-bar">
+    <div class="pill">✓ <b id="hdr-correct">0</b></div>
+    <div class="pill">✗ <b id="hdr-wrong">0</b></div>
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showPage('quiz')">Άσκηση</button>
+  <button class="tab-btn" onclick="showPage('vocab')">Λεξιλόγιο</button>
+  <button class="tab-btn" onclick="showPage('stats')">Στατιστικά</button>
+</div>
+
+<!-- QUIZ PAGE -->
+<div id="page-quiz" class="page active">
+  <div class="mode-row">
+    <button class="mode-btn active" id="m-it-gr" onclick="setMode('it-gr')">🇮🇹→🇬🇷</button>
+    <button class="mode-btn" id="m-gr-it" onclick="setMode('gr-it')">🇬🇷→🇮🇹</button>
+    <button class="mode-btn" id="m-mixed" onclick="setMode('mixed')">Μεικτό</button>
+  </div>
+  <div class="card">
+    <div id="quiz-inner"></div>
+  </div>
+</div>
+
+<!-- VOCAB PAGE -->
+<div id="page-vocab" class="page">
+  <input class="search-input" id="search" type="search" placeholder="Αναζήτηση..." oninput="renderVocab()" />
+  <div class="cat-filter" id="cat-filter"></div>
+  <div class="card" style="padding:0;overflow:hidden;">
+    <table class="vocab-table">
+      <thead><tr><th>Ιταλικά</th><th>Ελληνικά</th><th>Κατηγορία</th></tr></thead>
+      <tbody id="vocab-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- STATS PAGE -->
+<div id="page-stats" class="page">
+  <div class="stats-grid">
+    <div class="stat-card"><span class="val" id="st-total">0</span><span class="lbl">Συνολικές απαντήσεις</span></div>
+    <div class="stat-card"><span class="val" id="st-pct">0%</span><span class="lbl">Ποσοστό επιτυχίας</span></div>
+    <div class="stat-card"><span class="val" id="st-sessions">0</span><span class="lbl">Συνεδρίες</span></div>
+    <div class="stat-card"><span class="val" id="st-streak">0</span><span class="lbl">Καλύτερο σκορ %</span></div>
+  </div>
+  <div class="card">
+    <p style="font-size:13px;font-weight:600;color:var(--text2);margin-bottom:12px;">Ιστορικό συνεδριών</p>
+    <ul class="session-list" id="session-list"><li style="color:var(--text2);font-size:14px;">Δεν υπάρχουν ακόμα συνεδρίες.</li></ul>
+  </div>
+  <button class="btn" style="margin-top:12px;width:100%;color:var(--red-border);border-color:var(--red-border);" onclick="clearStats()">Εκκαθάριση στατιστικών</button>
+</div>
+
+<script>
+const vocab = [
+  {it:"ciao",gr:"γεια σου / χαίρετε",cat:"χαιρετισμοί"},
+  {it:"buongiorno",gr:"καλημέρα",cat:"χαιρετισμοί"},
+  {it:"buonasera",gr:"καλησπέρα",cat:"χαιρετισμοί"},
+  {it:"buonanotte",gr:"καληνύχτα",cat:"χαιρετισμοί"},
+  {it:"arrivederci",gr:"αντίο",cat:"χαιρετισμοί"},
+  {it:"per favore",gr:"παρακαλώ",cat:"βασικές λέξεις"},
+  {it:"grazie",gr:"ευχαριστώ",cat:"βασικές λέξεις"},
+  {it:"prego",gr:"παρακαλώ / τίποτα",cat:"βασικές λέξεις"},
+  {it:"scusa",gr:"συγγνώμη",cat:"βασικές λέξεις"},
+  {it:"sì",gr:"ναι",cat:"βασικές λέξεις"},
+  {it:"no",gr:"όχι",cat:"βασικές λέξεις"},
+  {it:"casa",gr:"σπίτι",cat:"ουσιαστικά"},
+  {it:"acqua",gr:"νερό",cat:"ουσιαστικά"},
+  {it:"pane",gr:"ψωμί",cat:"ουσιαστικά"},
+  {it:"libro",gr:"βιβλίο",cat:"ουσιαστικά"},
+  {it:"tavolo",gr:"τραπέζι",cat:"ουσιαστικά"},
+  {it:"porta",gr:"πόρτα",cat:"ουσιαστικά"},
+  {it:"finestra",gr:"παράθυρο",cat:"ουσιαστικά"},
+  {it:"amico",gr:"φίλος",cat:"ουσιαστικά"},
+  {it:"famiglia",gr:"οικογένεια",cat:"ουσιαστικά"},
+  {it:"lavoro",gr:"δουλειά / εργασία",cat:"ουσιαστικά"},
+  {it:"grande",gr:"μεγάλος",cat:"επίθετα"},
+  {it:"piccolo",gr:"μικρός",cat:"επίθετα"},
+  {it:"bello",gr:"ωραίος / όμορφος",cat:"επίθετα"},
+  {it:"buono",gr:"καλός",cat:"επίθετα"},
+  {it:"nuovo",gr:"νέος / καινούργιος",cat:"επίθετα"},
+  {it:"vecchio",gr:"παλιός / γέρος",cat:"επίθετα"},
+  {it:"essere",gr:"είμαι",cat:"ρήματα"},
+  {it:"avere",gr:"έχω",cat:"ρήματα"},
+  {it:"fare",gr:"κάνω",cat:"ρήματα"},
+  {it:"andare",gr:"πηγαίνω",cat:"ρήματα"},
+  {it:"venire",gr:"έρχομαι",cat:"ρήματα"},
+  {it:"mangiare",gr:"τρώω",cat:"ρήματα"},
+  {it:"bere",gr:"πίνω",cat:"ρήματα"},
+  {it:"parlare",gr:"μιλώ",cat:"ρήματα"},
+  {it:"capire",gr:"καταλαβαίνω",cat:"ρήματα"},
+  {it:"uno",gr:"ένα",cat:"αριθμοί"},
+  {it:"due",gr:"δύο",cat:"αριθμοί"},
+  {it:"tre",gr:"τρία",cat:"αριθμοί"},
+  {it:"quattro",gr:"τέσσερα",cat:"αριθμοί"},
+  {it:"cinque",gr:"πέντε",cat:"αριθμοί"},
+  {it:"sei",gr:"έξι",cat:"αριθμοί"},
+  {it:"sette",gr:"επτά",cat:"αριθμοί"},
+  {it:"otto",gr:"οκτώ",cat:"αριθμοί"},
+  {it:"nove",gr:"εννέα",cat:"αριθμοί"},
+  {it:"dieci",gr:"δέκα",cat:"αριθμοί"},
+  {it:"lunedì",gr:"Δευτέρα",cat:"μέρες"},
+  {it:"martedì",gr:"Τρίτη",cat:"μέρες"},
+  {it:"mercoledì",gr:"Τετάρτη",cat:"μέρες"},
+  {it:"giovedì",gr:"Πέμπτη",cat:"μέρες"},
+  {it:"venerdì",gr:"Παρασκευή",cat:"μέρες"},
+  {it:"sabato",gr:"Σάββατο",cat:"μέρες"},
+  {it:"domenica",gr:"Κυριακή",cat:"μέρες"},
+  {it:"rosso",gr:"κόκκινο",cat:"χρώματα"},
+  {it:"blu",gr:"μπλε",cat:"χρώματα"},
+  {it:"verde",gr:"πράσινο",cat:"χρώματα"},
+  {it:"giallo",gr:"κίτρινο",cat:"χρώματα"},
+  {it:"bianco",gr:"άσπρο",cat:"χρώματα"},
+  {it:"nero",gr:"μαύρο",cat:"χρώματα"},
+  {it:"pizza",gr:"πίτσα",cat:"φαγητό"},
+  {it:"pasta",gr:"ζυμαρικά",cat:"φαγητό"},
+  {it:"caffè",gr:"καφές",cat:"φαγητό"},
+  {it:"vino",gr:"κρασί",cat:"φαγητό"},
+  {it:"gelato",gr:"παγωτό",cat:"φαγητό"},
+  {it:"formaggio",gr:"τυρί",cat:"φαγητό"},
+];
+
+let mode = 'it-gr';
+let queue = [];
+let current = null;
+let correctCount = 0;
+let wrongCount = 0;
+let answered = false;
+let activeCat = 'all';
+
+// Stats from localStorage
+function loadStats() {
+  try { return JSON.parse(localStorage.getItem('italiano_stats') || '{"total":0,"correct":0,"sessions":[]}'); }
+  catch(e) { return {total:0,correct:0,sessions:[]}; }
+}
+function saveStats(s) { localStorage.setItem('italiano_stats', JSON.stringify(s)); }
+
+function normalize(s) {
+  return s.toLowerCase()
+    .replace(/[àáâã]/g,'a').replace(/[èéêë]/g,'e')
+    .replace(/[ìíîï]/g,'i').replace(/[òóôõ]/g,'o')
+    .replace(/[ùúûü]/g,'u')
+    .replace(/\s*\/\s*/g,'/').trim();
+}
+function checkAnswer(input, correct) {
+  const n = normalize(input);
+  return correct.split('/').map(v => normalize(v.trim())).some(v => v === n);
+}
+function shuffle(a) {
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}
+  return a;
+}
+
+function setMode(m) {
+  mode = m;
+  ['it-gr','gr-it','mixed'].forEach(x => document.getElementById('m-'+x).classList.toggle('active', x===m));
+  startQuiz();
+}
+
+function startQuiz() {
+  queue = shuffle([...vocab]);
+  correctCount = 0; wrongCount = 0;
+  updateHeader();
+  nextQ();
+}
+
+function updateHeader() {
+  document.getElementById('hdr-correct').textContent = correctCount;
+  document.getElementById('hdr-wrong').textContent = wrongCount;
+}
+
+function nextQ() {
+  if (!queue.length) { showFinished(); return; }
+  answered = false;
+  current = queue.pop();
+  const isItGr = mode==='it-gr' || (mode==='mixed' && Math.random()>0.5);
+  current._dir = isItGr ? 'it-gr' : 'gr-it';
+  const done = vocab.length - queue.length;
+  const pct = Math.round(done/vocab.length*100);
+  document.getElementById('quiz-inner').innerHTML = `
+    <p class="progress-text">${done} / ${vocab.length}</p>
+    <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+    <p class="q-label">${isItGr ? 'Μετάφρασε στα ελληνικά:' : 'Μετάφρασε στα ιταλικά:'}</p>
+    <p class="q-word">${isItGr ? current.it : current.gr}</p>
+    <input class="answer-input" id="ans" type="text" placeholder="${isItGr ? 'ελληνικά...' : 'italiano...'}" autocomplete="off" />
+    <div class="feedback" id="fb"></div>
+    <p class="hint" id="hint"></p>
+    <div class="btn-row">
+      <button class="btn primary" id="btn-main" onclick="doCheck()">Έλεγχος</button>
+    </div>
+  `;
+  const inp = document.getElementById('ans');
+  inp.addEventListener('keydown', e => { if(e.key==='Enter') answered ? nextQ() : doCheck(); });
+  inp.focus();
+}
+
+function doCheck() {
+  if(answered) return;
+  answered = true;
+  const inp = document.getElementById('ans');
+  const val = inp.value.trim();
+  const correct = current._dir==='it-gr' ? current.gr : current.it;
+  const ok = checkAnswer(val, correct);
+  if(ok) {
+    correctCount++;
+    inp.classList.add('correct');
+    document.getElementById('fb').textContent = '✓ Σωστό!';
+    document.getElementById('fb').className = 'feedback correct';
+  } else {
+    wrongCount++;
+    inp.classList.add('wrong');
+    document.getElementById('fb').textContent = '✗ Λάθος';
+    document.getElementById('fb').className = 'feedback wrong';
+    document.getElementById('hint').textContent = 'Σωστό: ' + correct;
+  }
+  updateHeader();
+  document.getElementById('btn-main').textContent = 'Επόμενο →';
+  document.getElementById('btn-main').onclick = nextQ;
+}
+
+function showFinished() {
+  const total = vocab.length;
+  const pct = Math.round(correctCount/total*100);
+  const msg = pct>=80 ? 'Bravissima! 🎉' : pct>=50 ? 'Καλή προσπάθεια! 💪' : 'Συνέχισε την εξάσκηση! 📚';
+  // Save session
+  const stats = loadStats();
+  stats.total += total;
+  stats.correct += correctCount;
+  stats.sessions.unshift({date: new Date().toLocaleDateString('el-GR'), correct: correctCount, total, pct});
+  if(stats.sessions.length > 20) stats.sessions.pop();
+  saveStats(stats);
+  document.getElementById('quiz-inner').innerHTML = `
+    <div class="finished">
+      <div class="pct">${pct}%</div>
+      <p class="sub">${correctCount} σωστά από ${total} &nbsp;·&nbsp; ${msg}</p>
+      <div class="btn-row" style="justify-content:center;gap:10px;">
+        <button class="btn primary" onclick="startQuiz()" style="flex:none;padding:11px 28px;">Ξανά</button>
+      </div>
+    </div>
+  `;
+}
+
+// ---- VOCAB ----
+function renderVocab() {
+  const q = (document.getElementById('search')?.value || '').toLowerCase();
+  const tbody = document.getElementById('vocab-body');
+  tbody.innerHTML = vocab
+    .filter(v => (activeCat==='all' || v.cat===activeCat) && (!q || v.it.includes(q) || v.gr.includes(q)))
+    .map(v => `<tr><td>${v.it}</td><td>${v.gr}</td><td><span class="badge">${v.cat}</span></td></tr>`)
+    .join('');
+}
+
+function buildCatFilter() {
+  const cats = ['all', ...new Set(vocab.map(v=>v.cat))];
+  const el = document.getElementById('cat-filter');
+  el.innerHTML = cats.map(c => `<button class="cat-btn${c==='all'?' active':''}" onclick="setCat('${c}')">${c==='all'?'Όλες':c}</button>`).join('');
+}
+
+function setCat(c) {
+  activeCat = c;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.toggle('active', b.textContent===(c==='all'?'Όλες':c)));
+  renderVocab();
+}
+
+// ---- STATS ----
+function renderStats() {
+  const s = loadStats();
+  document.getElementById('st-total').textContent = s.total;
+  document.getElementById('st-pct').textContent = s.total ? Math.round(s.correct/s.total*100)+'%' : '0%';
+  document.getElementById('st-sessions').textContent = s.sessions.length;
+  const best = s.sessions.length ? Math.max(...s.sessions.map(x=>x.pct)) : 0;
+  document.getElementById('st-streak').textContent = best+'%';
+  const ul = document.getElementById('session-list');
+  if(!s.sessions.length) { ul.innerHTML='<li style="color:var(--text2);font-size:14px;">Δεν υπάρχουν ακόμα συνεδρίες.</li>'; return; }
+  ul.innerHTML = s.sessions.map(x=>`
+    <li>
+      <span>${x.correct}/${x.total} σωστά <span class="date">${x.date}</span></span>
+      <span class="pct-badge">${x.pct}%</span>
+    </li>`).join('');
+}
+
+function clearStats() {
+  if(confirm('Να διαγραφούν τα στατιστικά;')) { localStorage.removeItem('italiano_stats'); renderStats(); }
+}
+
+// ---- NAVIGATION ----
+function showPage(p) {
+  document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  document.querySelectorAll('.tab-btn')[['quiz','vocab','stats'].indexOf(p)].classList.add('active');
+  if(p==='vocab') renderVocab();
+  if(p==='stats') renderStats();
+}
+
+// Init
+buildCatFilter();
+renderVocab();
+startQuiz();
+
+// Register service worker
+if('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+</script>
+</body>
+</html>
