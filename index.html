@@ -34,7 +34,6 @@
     }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg2); color: var(--text); min-height: 100vh; }
 
-    /* HEADER */
     header { background: var(--bg); border-bottom: 0.5px solid var(--border2); padding: 12px 16px; position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
     header h1 { font-size: 16px; font-weight: 600; white-space: nowrap; }
     .score-pills { display: flex; gap: 6px; flex-shrink: 0; }
@@ -43,29 +42,30 @@
     .pill.green { background: var(--green-bg); color: var(--green-text); border-color: var(--green-border); }
     .pill.red { background: var(--red-bg); color: var(--red-text); border-color: var(--red-border); }
 
-    /* TABS */
     .tabs { display: flex; background: var(--bg); border-bottom: 0.5px solid var(--border2); }
     .tab-btn { flex: 1; padding: 10px 0; font-size: 13px; font-weight: 500; border: none; background: none; color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; }
     .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-    /* TOOLBAR */
-    .toolbar { background: var(--bg); border-bottom: 0.5px solid var(--border); padding: 10px 12px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .toolbar { background: var(--bg); border-bottom: 0.5px solid var(--border); padding: 8px 12px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
     .toolbar-btn { font-size: 12px; padding: 5px 12px; border-radius: 999px; border: 0.5px solid var(--border2); background: var(--bg2); color: var(--text2); cursor: pointer; white-space: nowrap; }
     .toolbar-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
     .toolbar-sep { flex: 1; }
     .btn-reset { font-size: 12px; padding: 5px 12px; border-radius: 999px; border: 0.5px solid var(--red-border); color: var(--red-border); background: none; cursor: pointer; white-space: nowrap; }
 
-    /* PAGE */
+    .cat-filter { background: var(--bg); border-bottom: 0.5px solid var(--border); padding: 8px 12px; display: flex; gap: 6px; flex-wrap: wrap; }
+    .cat-btn { font-size: 12px; padding: 4px 12px; border-radius: 999px; border: 0.5px solid var(--border); background: var(--bg2); color: var(--text2); cursor: pointer; white-space: nowrap; }
+    .cat-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
     .page { display: none; }
     .page.active { display: block; }
 
-    /* QUIZ TABLE */
     .table-wrap { overflow-x: auto; }
     table.quiz-tbl { width: 100%; border-collapse: collapse; font-size: 14px; }
     table.quiz-tbl th { background: var(--bg); position: sticky; top: 0; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .4px; color: var(--text2); padding: 8px 10px; border-bottom: 1px solid var(--border2); text-align: left; z-index: 5; }
-    table.quiz-tbl td { padding: 4px 6px; border-bottom: 0.5px solid var(--border); vertical-align: middle; }
+    table.quiz-tbl td { padding: 3px 6px; border-bottom: 0.5px solid var(--border); vertical-align: middle; }
     table.quiz-tbl tr:hover td { background: var(--bg3); }
-    .it-word { font-weight: 500; color: var(--text); padding: 6px 10px; }
+    .cat-sep td { background: var(--bg3) !important; font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: .6px; padding: 6px 10px; border-bottom: 1px solid var(--border2); }
+    .it-word { font-weight: 500; color: var(--text); padding: 5px 10px; }
     .answer-inp {
       width: 100%; font-size: 14px; padding: 5px 8px;
       border: 1px solid transparent; border-radius: var(--radius);
@@ -74,23 +74,22 @@
     .answer-inp:focus { border-color: var(--accent); background: var(--bg); }
     .answer-inp.correct { background: var(--green-bg); color: var(--green-text); border-color: var(--green-border); }
     .answer-inp.wrong { background: var(--red-bg); color: var(--red-text); border-color: var(--red-border); }
-    .check-cell { width: 36px; text-align: center; font-size: 16px; }
-    .row-num { width: 32px; font-size: 11px; color: var(--text2); text-align: center; }
+    .check-cell { width: 30px; text-align: center; font-size: 15px; }
+    .row-num { width: 30px; font-size: 11px; color: var(--text2); text-align: center; }
 
-    /* BOTTOM BAR */
     .bottom-bar { position: sticky; bottom: 0; background: var(--bg); border-top: 0.5px solid var(--border2); padding: 10px 16px; display: flex; gap: 10px; align-items: center; justify-content: space-between; }
     .btn-check-all { flex: 1; padding: 10px; font-size: 14px; font-weight: 600; background: var(--accent); color: #fff; border: none; border-radius: var(--radius); cursor: pointer; }
     .btn-check-all:active { opacity: .85; }
 
-    /* VOCAB PAGE */
     .vocab-search { padding: 10px 12px; background: var(--bg); border-bottom: 0.5px solid var(--border); }
     .vocab-search input { width: 100%; font-size: 14px; padding: 8px 12px; border: 1px solid var(--border2); border-radius: var(--radius); background: var(--bg2); color: var(--text); outline: none; }
     .vocab-search input:focus { border-color: var(--accent); }
     table.vocab-tbl { width: 100%; border-collapse: collapse; font-size: 14px; }
-    table.vocab-tbl th { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .4px; color: var(--text2); padding: 8px 12px; border-bottom: 1px solid var(--border2); text-align: left; background: var(--bg); position: sticky; top: 0; }
-    table.vocab-tbl td { padding: 9px 12px; border-bottom: 0.5px solid var(--border); }
+    table.vocab-tbl th { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .4px; color: var(--text2); padding: 8px 12px; border-bottom: 1px solid var(--border2); text-align: left; background: var(--bg); position: sticky; top: 0; z-index:5;}
+    table.vocab-tbl td { padding: 8px 12px; border-bottom: 0.5px solid var(--border); }
+    table.vocab-tbl .cat-sep td { background: var(--bg3) !important; font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: .6px; padding: 5px 12px; }
+    .badge { font-size: 11px; padding: 2px 8px; border-radius: 999px; background: var(--accent-light); color: var(--accent); }
 
-    /* STATS PAGE */
     .stats-wrap { padding: 14px; }
     .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
     .stat-card { background: var(--bg); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 14px; text-align: center; }
@@ -130,13 +129,14 @@
     <div class="toolbar-sep"></div>
     <button class="btn-reset" onclick="resetQuiz()">↺ Καθαρισμός</button>
   </div>
+  <div class="cat-filter" id="quiz-cat-filter"></div>
   <div class="table-wrap">
     <table class="quiz-tbl">
       <thead><tr>
         <th class="row-num">#</th>
         <th id="col-q">Ιταλικά</th>
         <th id="col-a">Απάντηση (Ελληνικά)</th>
-        <th style="width:36px"></th>
+        <th style="width:30px"></th>
       </tr></thead>
       <tbody id="quiz-body"></tbody>
     </table>
@@ -154,7 +154,7 @@
   </div>
   <div class="table-wrap">
     <table class="vocab-tbl">
-      <thead><tr><th>#</th><th>Ιταλικά</th><th>Ελληνικά</th></tr></thead>
+      <thead><tr><th style="width:32px">#</th><th>Ιταλικά</th><th>Ελληνικά</th><th>Κατηγορία</th></tr></thead>
       <tbody id="vocab-body"></tbody>
     </table>
   </div>
@@ -179,104 +179,369 @@
 
 <script>
 const vocab = [
-  {it:"Sopra",gr:"Πάνω"},{it:"Su",gr:"Πάνω"},{it:"Sotto",gr:"Κάτω"},{it:"Dentro",gr:"Μέσα"},
-  {it:"Accanto a",gr:"Δίπλα σε"},{it:"Vicino a",gr:"Κοντά σε"},{it:"Davanti a",gr:"Μπροστά σε"},
-  {it:"Dietro",gr:"Πίσω"},{it:"Tra",gr:"Ανάμεσα σε - Μεταξύ"},{it:"Fra",gr:"Ανάμεσα σε - Μεταξύ"},
-  {it:"In mezzo a",gr:"Στη μέση"},{it:"Intorno a",gr:"Γύρω από"},{it:"Lontano da",gr:"Μακρυά από"},
-  {it:"Buongiorno",gr:"Καλημέρα"},{it:"Buonasera",gr:"Καλησπέρα"},{it:"Ciao - Salve",gr:"Γεια - Χαίρετε"},
-  {it:"Piacere",gr:"Χαίρω πολύ"},{it:"Come stai?",gr:"Πώς είσαι;"},{it:"Arrivederci",gr:"Αντίο - Εις το επανιδείν"},
-  {it:"Alto - Basso",gr:"Ψηλός - Κοντός"},{it:"Magro - Grasso",gr:"Αδύνατος - Χοντρός"},
-  {it:"Biondo - Bruno",gr:"Ξανθός - Μελαχρινός"},{it:"Simpatico - Antipatico",gr:"Συμπαθητικός - Αντιπαθητικός"},
-  {it:"Allegro - Triste",gr:"Χαρούμενος - Λυπημένος"},{it:"I capelli - Gli occhi",gr:"Τα μαλλιά - Τα μάτια"},
-  {it:"Tempo libero",gr:"Ελεύθερος χρόνος"},{it:"Ascoltare musica",gr:"Να ακούς μουσική"},
-  {it:"Leggere un libro",gr:"Να διαβάζεις βιβλίο"},{it:"Andare al cinema - a teatro",gr:"Να πας στον κινηματογράφο - στο θέατρο"},
-  {it:"Andare in palestra",gr:"Να πας στο γυμναστήριο"},{it:"Uscire con gli amici",gr:"Να βγεις με φίλους"},
-  {it:"Appartamento",gr:"Διαμέρισμα"},{it:"Ingresso",gr:"Είσοδος - Χολ"},{it:"Soggiorno - Salotto",gr:"Σαλόνι"},
-  {it:"Camera da letto",gr:"Υπνοδωμάτιο"},{it:"Cucina",gr:"Κουζίνα"},{it:"Bagno",gr:"Μπάνιο"},
-  {it:"Balcone",gr:"Μπαλκόνι"},{it:"Autobus - Metro - Tram",gr:"Λεωφορείο - Μετρό - Τραμ"},
-  {it:"Biglietto",gr:"Εισιτήριο"},{it:"Messaggio - Email",gr:"Μήνυμα - Email"},
-  {it:"Computer - Tablet",gr:"Υπολογιστής - Tablet"},{it:"Chiamarsi",gr:"Λέγομαι - Ονομάζομαι"},
-  {it:"Essere",gr:"Είμαι"},{it:"Avere",gr:"Έχω"},{it:"Lavorare",gr:"Εργάζομαι - Δουλεύω"},
-  {it:"Prendere",gr:"Παίρνω"},{it:"Aprire",gr:"Ανοίγω"},{it:"Finire",gr:"Τελειώνω"},
-  {it:"Abitare",gr:"Κατοικώ - Μένω"},{it:"Studiare",gr:"Σπουδάζω - Διαβάζω"},
-  {it:"Sapere",gr:"Ξέρω - Γνωρίζω"},{it:"Uscire",gr:"Βγαίνω"},{it:"Fare",gr:"Κάνω"},
-  {it:"Mangiare",gr:"Τρώω"},{it:"Vedere",gr:"Βλέπω"},{it:"Nome",gr:"Όνομα"},
-  {it:"Età",gr:"Ηλικία"},{it:"Nazionalità",gr:"Εθνικότητα"},{it:"Straniero - Straniera",gr:"Ξένος - Ξένη"},
-  {it:"Di dove sei?",gr:"Από που είσαι;"},{it:"Quanti anni hai?",gr:"Πόσων χρόνων είσαι;"},
-  {it:"Dove abiti?",gr:"Που μένεις;"},{it:"Forma di cortesia",gr:"Ευγενική μορφή (τύπος ευγενείας)"},
-  {it:"Che ora è? - Che ore sono?",gr:"Τι ώρα είναι;"},{it:"Mezzogiorno",gr:"Μεσημέρι"},
-  {it:"Mezzanotte",gr:"Μεσάνυχτα"},{it:"Un quarto",gr:"Ένα τέταρτο"},{it:"Mattina",gr:"Πρωϊ"},
-  {it:"Pomeriggio",gr:"Απόγευμα"},{it:"Sera",gr:"Βράδυ - Απόγευμα"},{it:"Fine settimana",gr:"Σαββατοκύριακο"},
-  {it:"I giorni della settimana",gr:"Οι ημέρες της εβδομάδας"},{it:"Chiave - Chiavi",gr:"Κλειδί - Κλειδιά"},
-  {it:"Borsa",gr:"Τσάντα"},{it:"Zaino",gr:"Σακίδιο"},{it:"Libro",gr:"Βιβλίο"},
-  {it:"Gatto",gr:"Γάτα"},{it:"Cane",gr:"Σκύλος"},{it:"Macchina",gr:"Αυτοκίνητο"},
-  {it:"Tavolo",gr:"Τραπέζι"},{it:"Invitare qualcuno",gr:"Να προσκαλέσεις κάποιον"},
-  {it:"Accettare un invito",gr:"Να αποδεχτείς μια πρόσκληση"},{it:"Rifiutare un invito",gr:"Να αρνηθείς μια πρόσκληση"},
-  {it:"Volentieri",gr:"Ευχαρίστως"},{it:"Purtroppo non posso",gr:"Δυστυχώς δεν μπορώ"},
-  {it:"Mi dispiace",gr:"Λυπάμαι - Με συγχωρείς"},{it:"Appuntamento",gr:"Ραντεβού"},
-  {it:"Periferia",gr:"Περιφέρεια - Προάστιο"},{it:"Centro",gr:"Κέντρο"},
-  {it:"Affitto",gr:"Ενοίκιο"},{it:"Ascensore",gr:"Ανελκυστήρας - Ασανσέρ"},
-  {it:"Primo",gr:"Πρώτος"},{it:"Secondo",gr:"Δεύτερος"},{it:"Terzo",gr:"Τρίτος"},
-  {it:"Quarto",gr:"Τέταρτος"},{it:"Quinto",gr:"Πέμπτος"},{it:"Sesto",gr:"Έκτος"},
-  {it:"Settimo",gr:"Έβδομος"},{it:"Ottavo",gr:"Όγδοος"},{it:"Nono",gr:"Ένατος"},
-  {it:"Decimo",gr:"Δέκατος"},{it:"Comodo",gr:"Άνετος - Βολικός"},{it:"Luminoso",gr:"Φωτεινός"},
-  {it:"Passeggero",gr:"Επιβάτης"},{it:"Tabaccheria",gr:"Καπνοπωλείο - Περίπτερο"},
-  {it:"Edicola",gr:"Περίπτερο εφημερίδων"},{it:"Macchinette automatiche",gr:"Αυτόματες μηχανές"},
-  {it:"Abbonamento",gr:"Συνδρομή - Μηνιαίο εισιτήριο"},{it:"Cellulare",gr:"Κινητό τηλέφωνο"},
-  {it:"Convalidare",gr:"Επικυρώνω"},{it:"Timbrare",gr:"Χτυπάω κάρτα - εισιτήριο"},
-  {it:"Inizio della corsa",gr:"Αρχή της διαδρομής"},{it:"Stazione",gr:"Σταθμός"},
-  {it:"Salire",gr:"Ανεβαίνω - Επιβιβάζομαι"},{it:"Scendere",gr:"Κατεβαίνω - Αποβιβάζομαι"},
-  {it:"Famiglia",gr:"Οικογένεια"},{it:"Piscina",gr:"Πισίνα"},{it:"Partita a carte",gr:"Παιχνίδι με χαρτιά"},
-  {it:"Tango",gr:"Τάνγκο"},{it:"Camminare",gr:"Περπατώ"},{it:"Correre",gr:"Τρέχω"},
-  {it:"Bicicletta",gr:"Ποδήλατο"},{it:"Social media",gr:"Μέσα κοινωνικής δικτύωσης"},
-  {it:"Lettura",gr:"Ανάγνωση"},{it:"Giardinaggio",gr:"Κηπουρική"},{it:"Amici",gr:"Φίλοι"},
-  {it:"Inviare un video",gr:"Να στείλεις βίντεο"},{it:"Computer - Portatile",gr:"Υπολογιστής - Laptop"},
-  {it:"Server",gr:"Διακομιστής"},{it:"Tecnico",gr:"Τεχνικός"},{it:"Pausa pranzo",gr:"Διάλειμμα μεσημεριανού"},
-  {it:"Posta",gr:"Ταχυδρομείο - Αλληλογραφία"},{it:"Messaggio",gr:"Μήνυμα"},
-  {it:"Figurati",gr:"Μην το λες - Παρακαλώ (δεν χρειάζεται)"},{it:"Ultima fermata",gr:"Τελευταία στάση"},
-  {it:"Quadro",gr:"Πίνακας ζωγραφικής"},{it:"Pianta",gr:"Φυτό - Κάτοψη"},
-  {it:"Divano",gr:"Καναπές"},{it:"Poltrona",gr:"Πολυθρόνα"},{it:"Libreria",gr:"Βιβλιοθήκη"},
-  {it:"Scaffale",gr:"Ράφι"},{it:"Lampada",gr:"Λάμπα - Φωτιστικό"},{it:"Letto",gr:"Κρεβάτι"},
-  {it:"Sedia",gr:"Καρέκλα"},{it:"Tavolino",gr:"Τραπεζάκι"},{it:"Scrivania",gr:"Γραφείο"},
-  {it:"Tappeto",gr:"Χαλί"},{it:"Armadio",gr:"Ντουλάπα"},{it:"Tende",gr:"Κουρτίνες"},
-  {it:"Specchio",gr:"Καθρέπτης"},{it:"Televisione",gr:"Τηλεόραση"},{it:"Cuscino",gr:"Μαξιλάρι"},
-  {it:"andare",gr:"πηγαίνω"},{it:"venire",gr:"έρχομαι"},{it:"partire",gr:"αναχωρώ"},
-  {it:"arrivare",gr:"φτάνω"},{it:"ritornare",gr:"επιστρέφω"},{it:"entrare",gr:"μπαίνω"},
-  {it:"cadere",gr:"πέφτω"},{it:"rimanere",gr:"μένω - παραμένω"},{it:"restare",gr:"μένω - μένω πίσω"},
-  {it:"stare",gr:"είμαι - βρίσκομαι"},{it:"nascere",gr:"γεννιέμαι"},{it:"morire",gr:"πεθαίνω"},
-  {it:"diventare",gr:"γίνομαι"},{it:"riuscire",gr:"καταφέρνω"},{it:"costare",gr:"κοστίζω"},
-  {it:"piacere",gr:"αρέσω"},{it:"succedere",gr:"συμβαίνω"},{it:"mancare",gr:"λείπω - μου λείπει"},
-  {it:"durare",gr:"διαρκώ"},{it:"sembrare",gr:"φαίνομαι - μοιάζω"},{it:"bastare",gr:"αρκώ"},
-  {it:"ascendere",gr:"ανέρχομαι"},{it:"scendere",gr:"κατεβαίνω"},{it:"spendere",gr:"ξοδεύω"},
-  {it:"chiudere",gr:"κλείνω"},{it:"decidere",gr:"αποφασίζω"},{it:"ridere",gr:"γελώ"},
-  {it:"mettere",gr:"βάζω"},{it:"promettere",gr:"υπόσχομαι"},{it:"discutere",gr:"συζητώ - διαφωνώ"},
-  {it:"correggere",gr:"διορθώνω"},{it:"leggere",gr:"διαβάζω"},{it:"stringere",gr:"σφίγγω"},
-  {it:"esprimere",gr:"εκφράζω"},{it:"estendere",gr:"εκτείνω - επεκτείνω"},
-  {it:"rendere",gr:"κάνω - αποδίδω"},{it:"cogliere",gr:"μαζεύω - συλλαμβάνω"},
-  {it:"scrivere",gr:"γράφω"},{it:"dire",gr:"λέω"},{it:"rompere",gr:"σπάω"},
-  {it:"tradurre",gr:"μεταφράζω"},{it:"giungere",gr:"φτάνω"},{it:"piangere",gr:"κλαίω"},
-  {it:"spegnere",gr:"σβήνω"},{it:"chiedere",gr:"ζητώ - ρωτώ"},{it:"porre",gr:"θέτω - τοποθετώ"},
-  {it:"rispondere",gr:"απαντώ"},{it:"vincere",gr:"κερδίζω"},{it:"mungere",gr:"αρμέγω"},
-  {it:"scegliere",gr:"επιλέγω"},{it:"commuovere",gr:"συγκινώ"},{it:"rivolgere",gr:"απευθύνω"},
-  {it:"coprire",gr:"καλύπτω"},{it:"offrire",gr:"προσφέρω"},{it:"comparire",gr:"εμφανίζομαι"},
-  {it:"perdere",gr:"χάνω"},{it:"vivere",gr:"ζω"},{it:"bere",gr:"πίνω"},
-  {it:"persuadere",gr:"πείθω"}
+  // ΧΑΙΡΕΤΙΣΜΟΙ & ΒΑΣΙΚΕΣ ΕΚΦΡΑΣΕΙΣ
+  {it:"Buongiorno",gr:"Καλημέρα",cat:"χαιρετισμοί"},
+  {it:"Buonasera",gr:"Καλησπέρα",cat:"χαιρετισμοί"},
+  {it:"Buonanotte",gr:"Καληνύχτα",cat:"χαιρετισμοί"},
+  {it:"Ciao - Salve",gr:"Γεια - Χαίρετε",cat:"χαιρετισμοί"},
+  {it:"Arrivederci",gr:"Αντίο - Εις το επανιδείν",cat:"χαιρετισμοί"},
+  {it:"Piacere",gr:"Χαίρω πολύ",cat:"χαιρετισμοί"},
+  {it:"Come stai?",gr:"Πώς είσαι;",cat:"χαιρετισμοί"},
+  {it:"Come va?",gr:"Πώς πάει;",cat:"χαιρετισμοί"},
+  {it:"Bene grazie",gr:"Καλά ευχαριστώ",cat:"χαιρετισμοί"},
+  {it:"Per favore",gr:"Παρακαλώ",cat:"χαιρετισμοί"},
+  {it:"Grazie",gr:"Ευχαριστώ",cat:"χαιρετισμοί"},
+  {it:"Prego",gr:"Παρακαλώ - Τίποτα",cat:"χαιρετισμοί"},
+  {it:"Scusa - Scusi",gr:"Συγγνώμη",cat:"χαιρετισμοί"},
+  {it:"Mi dispiace",gr:"Λυπάμαι - Με συγχωρείς",cat:"χαιρετισμοί"},
+  {it:"Figurati",gr:"Μην το λες - Παρακαλώ (δεν χρειάζεται)",cat:"χαιρετισμοί"},
+  {it:"Volentieri",gr:"Ευχαρίστως",cat:"χαιρετισμοί"},
+  {it:"Purtroppo non posso",gr:"Δυστυχώς δεν μπορώ",cat:"χαιρετισμοί"},
+
+  // ΠΡΟΣΩΠΙΚΕΣ ΠΛΗΡΟΦΟΡΙΕΣ
+  {it:"Nome",gr:"Όνομα",cat:"προσωπικά στοιχεία"},
+  {it:"Età",gr:"Ηλικία",cat:"προσωπικά στοιχεία"},
+  {it:"Nazionalità",gr:"Εθνικότητα",cat:"προσωπικά στοιχεία"},
+  {it:"Straniero - Straniera",gr:"Ξένος - Ξένη",cat:"προσωπικά στοιχεία"},
+  {it:"Chiamarsi",gr:"Λέγομαι - Ονομάζομαι",cat:"προσωπικά στοιχεία"},
+  {it:"Forma di cortesia",gr:"Ευγενική μορφή (τύπος ευγενείας)",cat:"προσωπικά στοιχεία"},
+  {it:"Di dove sei?",gr:"Από που είσαι;",cat:"προσωπικά στοιχεία"},
+  {it:"Quanti anni hai?",gr:"Πόσων χρόνων είσαι;",cat:"προσωπικά στοιχεία"},
+  {it:"Dove abiti?",gr:"Που μένεις;",cat:"προσωπικά στοιχεία"},
+  {it:"Famiglia",gr:"Οικογένεια",cat:"προσωπικά στοιχεία"},
+  {it:"Amici",gr:"Φίλοι",cat:"προσωπικά στοιχεία"},
+  {it:"Marito - Moglie",gr:"Σύζυγος (άνδρας) - Σύζυγος (γυναίκα)",cat:"προσωπικά στοιχεία"},
+  {it:"Figlio - Figlia",gr:"Γιος - Κόρη",cat:"προσωπικά στοιχεία"},
+
+  // ΠΕΡΙΓΡΑΦΗ ΠΡΟΣΩΠΟΥ
+  {it:"Alto - Basso",gr:"Ψηλός - Κοντός",cat:"περιγραφή προσώπου"},
+  {it:"Magro - Grasso",gr:"Αδύνατος - Χοντρός",cat:"περιγραφή προσώπου"},
+  {it:"Biondo - Bruno",gr:"Ξανθός - Μελαχρινός",cat:"περιγραφή προσώπου"},
+  {it:"Simpatico - Antipatico",gr:"Συμπαθητικός - Αντιπαθητικός",cat:"περιγραφή προσώπου"},
+  {it:"Allegro - Triste",gr:"Χαρούμενος - Λυπημένος",cat:"περιγραφή προσώπου"},
+  {it:"I capelli - Gli occhi",gr:"Τα μαλλιά - Τα μάτια",cat:"περιγραφή προσώπου"},
+  {it:"Giovane - Anziano",gr:"Νέος - Ηλικιωμένος",cat:"περιγραφή προσώπου"},
+  {it:"Bello - Brutto",gr:"Όμορφος - Άσχημος",cat:"περιγραφή προσώπου"},
+
+  // ΕΠΙΡΡΗΜΑΤΑ ΤΟΠΟΥ
+  {it:"Sopra",gr:"Πάνω",cat:"επιρρήματα τόπου"},
+  {it:"Su",gr:"Πάνω",cat:"επιρρήματα τόπου"},
+  {it:"Sotto",gr:"Κάτω",cat:"επιρρήματα τόπου"},
+  {it:"Dentro",gr:"Μέσα",cat:"επιρρήματα τόπου"},
+  {it:"Fuori",gr:"Έξω",cat:"επιρρήματα τόπου"},
+  {it:"Accanto a",gr:"Δίπλα σε",cat:"επιρρήματα τόπου"},
+  {it:"Vicino a",gr:"Κοντά σε",cat:"επιρρήματα τόπου"},
+  {it:"Davanti a",gr:"Μπροστά σε",cat:"επιρρήματα τόπου"},
+  {it:"Dietro",gr:"Πίσω",cat:"επιρρήματα τόπου"},
+  {it:"Tra",gr:"Ανάμεσα σε - Μεταξύ",cat:"επιρρήματα τόπου"},
+  {it:"Fra",gr:"Ανάμεσα σε - Μεταξύ",cat:"επιρρήματα τόπου"},
+  {it:"In mezzo a",gr:"Στη μέση",cat:"επιρρήματα τόπου"},
+  {it:"Intorno a",gr:"Γύρω από",cat:"επιρρήματα τόπου"},
+  {it:"Lontano da",gr:"Μακρυά από",cat:"επιρρήματα τόπου"},
+  {it:"A destra",gr:"Δεξιά",cat:"επιρρήματα τόπου"},
+  {it:"A sinistra",gr:"Αριστερά",cat:"επιρρήματα τόπου"},
+  {it:"Dritto",gr:"Ευθεία",cat:"επιρρήματα τόπου"},
+
+  // ΧΡΟΝΟΣ
+  {it:"Che ora è? - Che ore sono?",gr:"Τι ώρα είναι;",cat:"χρόνος"},
+  {it:"Mezzogiorno",gr:"Μεσημέρι",cat:"χρόνος"},
+  {it:"Mezzanotte",gr:"Μεσάνυχτα",cat:"χρόνος"},
+  {it:"Un quarto",gr:"Ένα τέταρτο",cat:"χρόνος"},
+  {it:"Mattina",gr:"Πρωϊ",cat:"χρόνος"},
+  {it:"Pomeriggio",gr:"Απόγευμα",cat:"χρόνος"},
+  {it:"Sera",gr:"Βράδυ - Απόγευμα",cat:"χρόνος"},
+  {it:"Fine settimana",gr:"Σαββατοκύριακο",cat:"χρόνος"},
+  {it:"I giorni della settimana",gr:"Οι ημέρες της εβδομάδας",cat:"χρόνος"},
+  {it:"Lunedì",gr:"Δευτέρα",cat:"χρόνος"},
+  {it:"Martedì",gr:"Τρίτη",cat:"χρόνος"},
+  {it:"Mercoledì",gr:"Τετάρτη",cat:"χρόνος"},
+  {it:"Giovedì",gr:"Πέμπτη",cat:"χρόνος"},
+  {it:"Venerdì",gr:"Παρασκευή",cat:"χρόνος"},
+  {it:"Sabato",gr:"Σάββατο",cat:"χρόνος"},
+  {it:"Domenica",gr:"Κυριακή",cat:"χρόνος"},
+  {it:"Oggi",gr:"Σήμερα",cat:"χρόνος"},
+  {it:"Ieri",gr:"Χθες",cat:"χρόνος"},
+  {it:"Domani",gr:"Αύριο",cat:"χρόνος"},
+  {it:"Adesso - Ora",gr:"Τώρα",cat:"χρόνος"},
+  {it:"Sempre",gr:"Πάντα",cat:"χρόνος"},
+  {it:"Mai",gr:"Ποτέ",cat:"χρόνος"},
+  {it:"Spesso",gr:"Συχνά",cat:"χρόνος"},
+
+  // ΑΡΙΘΜΟΙ ΤΑΚΤΙΚΟΙ
+  {it:"Primo",gr:"Πρώτος",cat:"τακτικοί αριθμοί"},
+  {it:"Secondo",gr:"Δεύτερος",cat:"τακτικοί αριθμοί"},
+  {it:"Terzo",gr:"Τρίτος",cat:"τακτικοί αριθμοί"},
+  {it:"Quarto",gr:"Τέταρτος",cat:"τακτικοί αριθμοί"},
+  {it:"Quinto",gr:"Πέμπτος",cat:"τακτικοί αριθμοί"},
+  {it:"Sesto",gr:"Έκτος",cat:"τακτικοί αριθμοί"},
+  {it:"Settimo",gr:"Έβδομος",cat:"τακτικοί αριθμοί"},
+  {it:"Ottavo",gr:"Όγδοος",cat:"τακτικοί αριθμοί"},
+  {it:"Nono",gr:"Ένατος",cat:"τακτικοί αριθμοί"},
+  {it:"Decimo",gr:"Δέκατος",cat:"τακτικοί αριθμοί"},
+
+  // ΣΠΙΤΙ & ΔΩΜΑΤΙΑ
+  {it:"Appartamento",gr:"Διαμέρισμα",cat:"σπίτι"},
+  {it:"Ingresso",gr:"Είσοδος - Χολ",cat:"σπίτι"},
+  {it:"Soggiorno - Salotto",gr:"Σαλόνι",cat:"σπίτι"},
+  {it:"Camera da letto",gr:"Υπνοδωμάτιο",cat:"σπίτι"},
+  {it:"Cucina",gr:"Κουζίνα",cat:"σπίτι"},
+  {it:"Bagno",gr:"Μπάνιο",cat:"σπίτι"},
+  {it:"Balcone",gr:"Μπαλκόνι",cat:"σπίτι"},
+  {it:"Periferia",gr:"Περιφέρεια - Προάστιο",cat:"σπίτι"},
+  {it:"Centro",gr:"Κέντρο",cat:"σπίτι"},
+  {it:"Affitto",gr:"Ενοίκιο",cat:"σπίτι"},
+  {it:"Ascensore",gr:"Ανελκυστήρας - Ασανσέρ",cat:"σπίτι"},
+  {it:"Comodo",gr:"Άνετος - Βολικός",cat:"σπίτι"},
+  {it:"Luminoso",gr:"Φωτεινός",cat:"σπίτι"},
+  {it:"Piano",gr:"Όροφος",cat:"σπίτι"},
+  {it:"Palazzo",gr:"Πολυκατοικία - Κτήριο",cat:"σπίτι"},
+
+  // ΕΠΙΠΛΑ & ΑΝΤΙΚΕΙΜΕΝΑ ΣΠΙΤΙΟΥ
+  {it:"Divano",gr:"Καναπές",cat:"έπιπλα"},
+  {it:"Poltrona",gr:"Πολυθρόνα",cat:"έπιπλα"},
+  {it:"Libreria",gr:"Βιβλιοθήκη",cat:"έπιπλα"},
+  {it:"Scaffale",gr:"Ράφι",cat:"έπιπλα"},
+  {it:"Lampada",gr:"Λάμπα - Φωτιστικό",cat:"έπιπλα"},
+  {it:"Letto",gr:"Κρεβάτι",cat:"έπιπλα"},
+  {it:"Sedia",gr:"Καρέκλα",cat:"έπιπλα"},
+  {it:"Tavolo",gr:"Τραπέζι",cat:"έπιπλα"},
+  {it:"Tavolino",gr:"Τραπεζάκι",cat:"έπιπλα"},
+  {it:"Scrivania",gr:"Γραφείο",cat:"έπιπλα"},
+  {it:"Tappeto",gr:"Χαλί",cat:"έπιπλα"},
+  {it:"Armadio",gr:"Ντουλάπα",cat:"έπιπλα"},
+  {it:"Tende",gr:"Κουρτίνες",cat:"έπιπλα"},
+  {it:"Specchio",gr:"Καθρέπτης",cat:"έπιπλα"},
+  {it:"Televisione",gr:"Τηλεόραση",cat:"έπιπλα"},
+  {it:"Cuscino",gr:"Μαξιλάρι",cat:"έπιπλα"},
+  {it:"Quadro",gr:"Πίνακας ζωγραφικής",cat:"έπιπλα"},
+  {it:"Pianta",gr:"Φυτό - Κάτοψη",cat:"έπιπλα"},
+
+  // ΜΕΤΑΦΟΡΕΣ & ΠΟΛΗ
+  {it:"Autobus - Metro - Tram",gr:"Λεωφορείο - Μετρό - Τραμ",cat:"μεταφορές"},
+  {it:"Biglietto",gr:"Εισιτήριο",cat:"μεταφορές"},
+  {it:"Abbonamento",gr:"Συνδρομή - Μηνιαίο εισιτήριο",cat:"μεταφορές"},
+  {it:"Convalidare",gr:"Επικυρώνω",cat:"μεταφορές"},
+  {it:"Timbrare",gr:"Χτυπάω κάρτα - εισιτήριο",cat:"μεταφορές"},
+  {it:"Inizio della corsa",gr:"Αρχή της διαδρομής",cat:"μεταφορές"},
+  {it:"Stazione",gr:"Σταθμός",cat:"μεταφορές"},
+  {it:"Salire",gr:"Ανεβαίνω - Επιβιβάζομαι",cat:"μεταφορές"},
+  {it:"Scendere",gr:"Κατεβαίνω - Αποβιβάζομαι",cat:"μεταφορές"},
+  {it:"Ultima fermata",gr:"Τελευταία στάση",cat:"μεταφορές"},
+  {it:"Passeggero",gr:"Επιβάτης",cat:"μεταφορές"},
+  {it:"Macchina",gr:"Αυτοκίνητο",cat:"μεταφορές"},
+  {it:"Bicicletta",gr:"Ποδήλατο",cat:"μεταφορές"},
+  {it:"Tabaccheria",gr:"Καπνοπωλείο - Περίπτερο",cat:"μεταφορές"},
+  {it:"Edicola",gr:"Περίπτερο εφημερίδων",cat:"μεταφορές"},
+  {it:"Macchinette automatiche",gr:"Αυτόματες μηχανές",cat:"μεταφορές"},
+  {it:"Appuntamento",gr:"Ραντεβού",cat:"μεταφορές"},
+
+  // ΕΛΕΥΘΕΡΟΣ ΧΡΟΝΟΣ & ΧΟΜΠΙ
+  {it:"Tempo libero",gr:"Ελεύθερος χρόνος",cat:"ελεύθερος χρόνος"},
+  {it:"Ascoltare musica",gr:"Να ακούς μουσική",cat:"ελεύθερος χρόνος"},
+  {it:"Leggere un libro",gr:"Να διαβάζεις βιβλίο",cat:"ελεύθερος χρόνος"},
+  {it:"Andare al cinema - a teatro",gr:"Να πας στον κινηματογράφο - στο θέατρο",cat:"ελεύθερος χρόνος"},
+  {it:"Andare in palestra",gr:"Να πας στο γυμναστήριο",cat:"ελεύθερος χρόνος"},
+  {it:"Uscire con gli amici",gr:"Να βγεις με φίλους",cat:"ελεύθερος χρόνος"},
+  {it:"Piscina",gr:"Πισίνα",cat:"ελεύθερος χρόνος"},
+  {it:"Partita a carte",gr:"Παιχνίδι με χαρτιά",cat:"ελεύθερος χρόνος"},
+  {it:"Tango",gr:"Τάνγκο",cat:"ελεύθερος χρόνος"},
+  {it:"Camminare",gr:"Περπατώ",cat:"ελεύθερος χρόνος"},
+  {it:"Correre",gr:"Τρέχω",cat:"ελεύθερος χρόνος"},
+  {it:"Lettura",gr:"Ανάγνωση",cat:"ελεύθερος χρόνος"},
+  {it:"Giardinaggio",gr:"Κηπουρική",cat:"ελεύθερος χρόνος"},
+  {it:"Viaggiare",gr:"Ταξιδεύω",cat:"ελεύθερος χρόνος"},
+  {it:"Cucinare",gr:"Μαγειρεύω",cat:"ελεύθερος χρόνος"},
+  {it:"Disegnare",gr:"Σχεδιάζω - Ζωγραφίζω",cat:"ελεύθερος χρόνος"},
+
+  // ΠΡΟΣΚΛΗΣΕΙΣ & ΚΟΙΝΩΝΙΚΕΣ ΚΑΤΑΣΤΑΣΕΙΣ
+  {it:"Invitare qualcuno",gr:"Να προσκαλέσεις κάποιον",cat:"κοινωνικές εκφράσεις"},
+  {it:"Accettare un invito",gr:"Να αποδεχτείς μια πρόσκληση",cat:"κοινωνικές εκφράσεις"},
+  {it:"Rifiutare un invito",gr:"Να αρνηθείς μια πρόσκληση",cat:"κοινωνικές εκφράσεις"},
+  {it:"Che bello!",gr:"Τι ωραίο!",cat:"κοινωνικές εκφράσεις"},
+  {it:"Davvero?",gr:"Αλήθεια;",cat:"κοινωνικές εκφράσεις"},
+  {it:"Certo",gr:"Βεβαίως - Φυσικά",cat:"κοινωνικές εκφράσεις"},
+  {it:"Forse",gr:"Ίσως",cat:"κοινωνικές εκφράσεις"},
+  {it:"Auguri!",gr:"Χρόνια πολλά! - Εύχομαι!",cat:"κοινωνικές εκφράσεις"},
+  {it:"In bocca al lupo!",gr:"Καλή τύχη!",cat:"κοινωνικές εκφράσεις"},
+
+  // ΤΕΧΝΟΛΟΓΙΑ & ΔΟΥΛΕΙΑ
+  {it:"Messaggio - Email",gr:"Μήνυμα - Email",cat:"τεχνολογία"},
+  {it:"Computer - Tablet",gr:"Υπολογιστής - Tablet",cat:"τεχνολογία"},
+  {it:"Computer - Portatile",gr:"Υπολογιστής - Laptop",cat:"τεχνολογία"},
+  {it:"Cellulare",gr:"Κινητό τηλέφωνο",cat:"τεχνολογία"},
+  {it:"Social media",gr:"Μέσα κοινωνικής δικτύωσης",cat:"τεχνολογία"},
+  {it:"Inviare un video",gr:"Να στείλεις βίντεο",cat:"τεχνολογία"},
+  {it:"Server",gr:"Διακομιστής",cat:"τεχνολογία"},
+  {it:"Tecnico",gr:"Τεχνικός",cat:"τεχνολογία"},
+  {it:"Posta",gr:"Ταχυδρομείο - Αλληλογραφία",cat:"τεχνολογία"},
+  {it:"Messaggio",gr:"Μήνυμα",cat:"τεχνολογία"},
+  {it:"Lavorare",gr:"Εργάζομαι - Δουλεύω",cat:"τεχνολογία"},
+  {it:"Pausa pranzo",gr:"Διάλειμμα μεσημεριανού",cat:"τεχνολογία"},
+
+  // ΑΝΤΙΚΕΙΜΕΝΑ ΚΑΘΗΜΕΡΙΝΗΣ ΖΩΗΣ
+  {it:"Chiave - Chiavi",gr:"Κλειδί - Κλειδιά",cat:"αντικείμενα"},
+  {it:"Borsa",gr:"Τσάντα",cat:"αντικείμενα"},
+  {it:"Zaino",gr:"Σακίδιο",cat:"αντικείμενα"},
+  {it:"Libro",gr:"Βιβλίο",cat:"αντικείμενα"},
+  {it:"Gatto",gr:"Γάτα",cat:"αντικείμενα"},
+  {it:"Cane",gr:"Σκύλος",cat:"αντικείμενα"},
+  {it:"Ombrello",gr:"Ομπρέλα",cat:"αντικείμενα"},
+  {it:"Occhiali",gr:"Γυαλιά",cat:"αντικείμενα"},
+  {it:"Portafoglio",gr:"Πορτοφόλι",cat:"αντικείμενα"},
+  {it:"Orologio",gr:"Ρολόι",cat:"αντικείμενα"},
+
+  // ΦΑΓΗΤΟ & ΠΟΤΟ
+  {it:"Pizza",gr:"Πίτσα",cat:"φαγητό"},
+  {it:"Pasta",gr:"Ζυμαρικά",cat:"φαγητό"},
+  {it:"Caffè",gr:"Καφές",cat:"φαγητό"},
+  {it:"Vino",gr:"Κρασί",cat:"φαγητό"},
+  {it:"Gelato",gr:"Παγωτό",cat:"φαγητό"},
+  {it:"Formaggio",gr:"Τυρί",cat:"φαγητό"},
+  {it:"Pane",gr:"Ψωμί",cat:"φαγητό"},
+  {it:"Acqua",gr:"Νερό",cat:"φαγητό"},
+  {it:"Birra",gr:"Μπύρα",cat:"φαγητό"},
+  {it:"Colazione",gr:"Πρωινό",cat:"φαγητό"},
+  {it:"Pranzo",gr:"Μεσημεριανό",cat:"φαγητό"},
+  {it:"Cena",gr:"Βραδινό",cat:"φαγητό"},
+  {it:"Ristorante",gr:"Εστιατόριο",cat:"φαγητό"},
+  {it:"Menù",gr:"Μενού",cat:"φαγητό"},
+  {it:"Conto",gr:"Λογαριασμός",cat:"φαγητό"},
+
+  // ΡΗΜΑΤΑ (ΒΑΣΙΚΑ - ανώμαλα/essere)
+  {it:"essere",gr:"είμαι",cat:"ρήματα essere"},
+  {it:"avere",gr:"έχω",cat:"ρήματα essere"},
+  {it:"fare",gr:"κάνω",cat:"ρήματα essere"},
+  {it:"dire",gr:"λέω",cat:"ρήματα essere"},
+  {it:"dare",gr:"δίνω",cat:"ρήματα essere"},
+  {it:"stare",gr:"είμαι - βρίσκομαι",cat:"ρήματα essere"},
+  {it:"sapere",gr:"ξέρω - γνωρίζω",cat:"ρήματα essere"},
+  {it:"potere",gr:"μπορώ",cat:"ρήματα essere"},
+  {it:"volere",gr:"θέλω",cat:"ρήματα essere"},
+  {it:"dovere",gr:"πρέπει - οφείλω",cat:"ρήματα essere"},
+
+  // ΡΗΜΑΤΑ ΚΙΝΗΣΗΣ (με essere)
+  {it:"andare",gr:"πηγαίνω",cat:"ρήματα κίνησης"},
+  {it:"venire",gr:"έρχομαι",cat:"ρήματα κίνησης"},
+  {it:"partire",gr:"αναχωρώ",cat:"ρήματα κίνησης"},
+  {it:"arrivare",gr:"φτάνω",cat:"ρήματα κίνησης"},
+  {it:"ritornare",gr:"επιστρέφω",cat:"ρήματα κίνησης"},
+  {it:"entrare",gr:"μπαίνω",cat:"ρήματα κίνησης"},
+  {it:"uscire",gr:"βγαίνω",cat:"ρήματα κίνησης"},
+  {it:"salire",gr:"ανεβαίνω - επιβιβάζομαι",cat:"ρήματα κίνησης"},
+  {it:"scendere",gr:"κατεβαίνω - αποβιβάζομαι",cat:"ρήματα κίνησης"},
+  {it:"cadere",gr:"πέφτω",cat:"ρήματα κίνησης"},
+  {it:"rimanere",gr:"μένω - παραμένω",cat:"ρήματα κίνησης"},
+  {it:"restare",gr:"μένω - μένω πίσω",cat:"ρήματα κίνησης"},
+  {it:"nascere",gr:"γεννιέμαι",cat:"ρήματα κίνησης"},
+  {it:"morire",gr:"πεθαίνω",cat:"ρήματα κίνησης"},
+  {it:"diventare",gr:"γίνομαι",cat:"ρήματα κίνησης"},
+  {it:"giungere",gr:"φτάνω",cat:"ρήματα κίνησης"},
+
+  // ΑΛΛΑ ΡΗΜΑΤΑ
+  {it:"mangiare",gr:"τρώω",cat:"ρήματα"},
+  {it:"bere",gr:"πίνω",cat:"ρήματα"},
+  {it:"parlare",gr:"μιλώ",cat:"ρήματα"},
+  {it:"capire",gr:"καταλαβαίνω",cat:"ρήματα"},
+  {it:"vedere",gr:"βλέπω",cat:"ρήματα"},
+  {it:"prendere",gr:"παίρνω",cat:"ρήματα"},
+  {it:"aprire",gr:"ανοίγω",cat:"ρήματα"},
+  {it:"finire",gr:"τελειώνω",cat:"ρήματα"},
+  {it:"abitare",gr:"κατοικώ - μένω",cat:"ρήματα"},
+  {it:"studiare",gr:"σπουδάζω - διαβάζω",cat:"ρήματα"},
+  {it:"scrivere",gr:"γράφω",cat:"ρήματα"},
+  {it:"leggere",gr:"διαβάζω",cat:"ρήματα"},
+  {it:"rispondere",gr:"απαντώ",cat:"ρήματα"},
+  {it:"chiedere",gr:"ζητώ - ρωτώ",cat:"ρήματα"},
+  {it:"chiudere",gr:"κλείνω",cat:"ρήματα"},
+  {it:"decidere",gr:"αποφασίζω",cat:"ρήματα"},
+  {it:"mettere",gr:"βάζω",cat:"ρήματα"},
+  {it:"ridere",gr:"γελώ",cat:"ρήματα"},
+  {it:"piangere",gr:"κλαίω",cat:"ρήματα"},
+  {it:"dormire",gr:"κοιμάμαι",cat:"ρήματα"},
+  {it:"lavorare",gr:"εργάζομαι - δουλεύω",cat:"ρήματα"},
+  {it:"riuscire",gr:"καταφέρνω",cat:"ρήματα"},
+  {it:"costare",gr:"κοστίζω",cat:"ρήματα"},
+  {it:"piacere",gr:"αρέσω",cat:"ρήματα"},
+  {it:"succedere",gr:"συμβαίνω",cat:"ρήματα"},
+  {it:"mancare",gr:"λείπω - μου λείπει",cat:"ρήματα"},
+  {it:"durare",gr:"διαρκώ",cat:"ρήματα"},
+  {it:"sembrare",gr:"φαίνομαι - μοιάζω",cat:"ρήματα"},
+  {it:"bastare",gr:"αρκώ",cat:"ρήματα"},
+  {it:"spendere",gr:"ξοδεύω",cat:"ρήματα"},
+  {it:"perdere",gr:"χάνω",cat:"ρήματα"},
+  {it:"vivere",gr:"ζω",cat:"ρήματα"},
+  {it:"offrire",gr:"προσφέρω",cat:"ρήματα"},
+  {it:"coprire",gr:"καλύπτω",cat:"ρήματα"},
+  {it:"vincere",gr:"κερδίζω",cat:"ρήματα"},
+  {it:"scegliere",gr:"επιλέγω",cat:"ρήματα"},
+  {it:"tradurre",gr:"μεταφράζω",cat:"ρήματα"},
+  {it:"promettere",gr:"υπόσχομαι",cat:"ρήματα"},
+  {it:"discutere",gr:"συζητώ - διαφωνώ",cat:"ρήματα"},
+  {it:"correggere",gr:"διορθώνω",cat:"ρήματα"},
+  {it:"spegnere",gr:"σβήνω",cat:"ρήματα"},
+  {it:"rompere",gr:"σπάω",cat:"ρήματα"},
+  {it:"commuovere",gr:"συγκινώ",cat:"ρήματα"},
+  {it:"persuadere",gr:"πείθω",cat:"ρήματα"},
+  {it:"esprimere",gr:"εκφράζω",cat:"ρήματα"},
+  {it:"comparire",gr:"εμφανίζομαι",cat:"ρήματα"},
+  {it:"ascendere",gr:"ανέρχομαι",cat:"ρήματα"},
+  {it:"stringere",gr:"σφίγγω",cat:"ρήματα"},
+  {it:"cogliere",gr:"μαζεύω - συλλαμβάνω",cat:"ρήματα"},
+  {it:"rivolgere",gr:"απευθύνω",cat:"ρήματα"},
+  {it:"rendere",gr:"κάνω - αποδίδω",cat:"ρήματα"},
+  {it:"porre",gr:"θέτω - τοποθετώ",cat:"ρήματα"},
+  {it:"estendere",gr:"εκτείνω - επεκτείνω",cat:"ρήματα"},
+  {it:"mungere",gr:"αρμέγω",cat:"ρήματα"},
 ];
 
-let direction = 'gr'; // 'gr' = it→gr, 'it' = gr→it
+let direction = 'gr';
+let activeCat = 'all';
+let quizRows = []; // {vocab index, row index in filtered}
 
-function norm(s) {
+function normGr(s) {
   return s.toLowerCase()
     .replace(/[αά]/g,'α').replace(/[εέ]/g,'ε').replace(/[ηή]/g,'η')
-    .replace(/[ιίϊΐ]/g,'ι').replace(/[οό]/g,'ο').replace(/[υύϋΰ]/g,'υ').replace(/[ωώ]/g,'ω')
-    .replace(/[àáâ]/g,'a').replace(/[èéê]/g,'e').replace(/[ìíî]/g,'i')
-    .replace(/[òóô]/g,'o').replace(/[ùúû]/g,'u')
-    .replace(/\s*-\s*/g,' - ').trim();
+    .replace(/[ιίϊΐ]/g,'ι').replace(/[οό]/g,'ο').replace(/[υύϋΰ]/g,'υ')
+    .replace(/[ωώ]/g,'ω').trim();
 }
+function normIt(s) {
+  return s.toLowerCase()
+    .replace(/[àáâ]/g,'a').replace(/[èéê]/g,'e').replace(/[ìíî]/g,'i')
+    .replace(/[òóô]/g,'o').replace(/[ùúû]/g,'u').trim();
+}
+function normAll(s) { return normGr(normIt(s)); }
+
 function isCorrect(input, correct) {
-  const n = norm(input);
-  return correct.split('-').map(p => norm(p.trim())).some(p => p === n) ||
-         norm(correct) === n;
+  const ni = normAll(input);
+  if (!ni) return false;
+  // try exact match
+  if (normAll(correct) === ni) return true;
+  // try each variant split by ' - '
+  const variants = correct.split(' - ').map(v => normAll(v.trim()));
+  return variants.some(v => v === ni);
+}
+
+const cats = ['all', ...new Set(vocab.map(v => v.cat))];
+
+function filteredVocab() {
+  return activeCat === 'all' ? vocab : vocab.filter(v => v.cat === activeCat);
+}
+
+// BUILD CAT FILTER BUTTONS
+function buildCatFilter() {
+  const el = document.getElementById('quiz-cat-filter');
+  el.innerHTML = cats.map(c =>
+    `<button class="cat-btn${c==='all'?' active':''}" onclick="setCat('${c}')">${c==='all'?'Όλες':c}</button>`
+  ).join('');
+}
+
+function setCat(c) {
+  activeCat = c;
+  document.querySelectorAll('.cat-btn').forEach(b => {
+    const label = b.textContent;
+    b.classList.toggle('active', (c==='all' && label==='Όλες') || label===c);
+  });
+  renderQuiz();
 }
 
 function setDir(d) {
@@ -289,74 +554,95 @@ function setDir(d) {
 }
 
 function renderQuiz() {
+  const fv = filteredVocab();
   const tbody = document.getElementById('quiz-body');
-  tbody.innerHTML = vocab.map((v,i) => {
+  let html = '';
+  let lastCat = null;
+  let rowNum = 0;
+
+  fv.forEach((v, i) => {
+    if (v.cat !== lastCat) {
+      html += `<tr class="cat-sep"><td colspan="4">${v.cat}</td></tr>`;
+      lastCat = v.cat;
+    }
     const q = direction==='gr' ? v.it : v.gr;
-    return `<tr>
-      <td class="row-num">${i+1}</td>
+    rowNum++;
+    html += `<tr>
+      <td class="row-num">${rowNum}</td>
       <td class="it-word">${q}</td>
-      <td><input class="answer-inp" id="inp-${i}" type="text" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="handleKey(event,${i})" /></td>
+      <td><input class="answer-inp" id="inp-${i}" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" onkeydown="handleKey(event,'${i}',${JSON.stringify(fv.map((_,j)=>j))})" /></td>
       <td class="check-cell" id="chk-${i}"></td>
     </tr>`;
-  }).join('');
+  });
+  tbody.innerHTML = html;
   updateHeader(0,0);
+  document.getElementById('bottom-info').textContent = `${fv.length} λέξεις — γράψε και πάτα Έλεγχος`;
 }
 
-function handleKey(e, i) {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    const next = document.getElementById('inp-'+(i+1));
-    if (next) next.focus();
+function handleKey(e, idx, idxList) {
+  if (e.key !== 'Enter') return;
+  e.preventDefault();
+  const pos = idxList.indexOf(parseInt(idx));
+  if (pos < idxList.length - 1) {
+    document.getElementById('inp-'+idxList[pos+1])?.focus();
   }
 }
 
 function checkAll() {
-  let ok = 0, ko = 0;
-  vocab.forEach((v,i) => {
+  const fv = filteredVocab();
+  let ok = 0, ko = 0, empty = 0;
+  fv.forEach((v, i) => {
     const inp = document.getElementById('inp-'+i);
+    if (!inp) return;
     const val = inp.value.trim();
-    if (!val) { inp.classList.remove('correct','wrong'); document.getElementById('chk-'+i).textContent=''; return; }
+    if (!val) { inp.classList.remove('correct','wrong'); document.getElementById('chk-'+i).textContent=''; empty++; return; }
     const correct = direction==='gr' ? v.gr : v.it;
     if (isCorrect(val, correct)) {
       inp.classList.add('correct'); inp.classList.remove('wrong');
-      document.getElementById('chk-'+i).textContent = '✓';
-      ok++;
+      document.getElementById('chk-'+i).textContent = '✓'; ok++;
     } else {
       inp.classList.add('wrong'); inp.classList.remove('correct');
-      document.getElementById('chk-'+i).textContent = '✗';
-      ko++;
+      document.getElementById('chk-'+i).textContent = '✗'; ko++;
     }
   });
   updateHeader(ok, ko);
-  saveSession(ok, ko);
-  document.getElementById('bottom-info').textContent = `${ok} σωστά · ${ko} λάθη · ${vocab.length - ok - ko} κενά`;
+  if (ok+ko > 0) saveSession(ok, ko);
+  document.getElementById('bottom-info').textContent = `✓ ${ok} σωστά · ✗ ${ko} λάθη · ${empty} κενά`;
 }
 
 function updateHeader(ok, ko) {
   document.getElementById('hdr-ok').textContent = ok;
   document.getElementById('hdr-ko').textContent = ko;
-  const total = ok + ko;
-  document.getElementById('hdr-pct').textContent = total > 0 ? Math.round(ok/total*100)+'%' : '—';
+  const total = ok+ko;
+  document.getElementById('hdr-pct').textContent = total>0 ? Math.round(ok/total*100)+'%' : '—';
 }
 
 function resetQuiz() {
-  vocab.forEach((_,i) => {
+  const fv = filteredVocab();
+  fv.forEach((_, i) => {
     const inp = document.getElementById('inp-'+i);
-    inp.value = ''; inp.classList.remove('correct','wrong');
-    document.getElementById('chk-'+i).textContent = '';
+    if (!inp) return;
+    inp.value=''; inp.classList.remove('correct','wrong');
+    document.getElementById('chk-'+i).textContent='';
   });
   updateHeader(0,0);
-  document.getElementById('bottom-info').textContent = 'Γράψε τις απαντήσεις και πάτα Έλεγχος';
-  document.getElementById('inp-0')?.focus();
+  document.getElementById('bottom-info').textContent = `${fv.length} λέξεις — γράψε και πάτα Έλεγχος`;
 }
 
 // VOCAB
 function renderVocab() {
   const q = (document.getElementById('vsearch')?.value||'').toLowerCase();
-  document.getElementById('vocab-body').innerHTML = vocab
-    .filter(v => !q || v.it.toLowerCase().includes(q) || v.gr.toLowerCase().includes(q))
-    .map((v,i) => `<tr><td style="font-size:11px;color:var(--text2);text-align:center;">${i+1}</td><td style="font-weight:500">${v.it}</td><td>${v.gr}</td></tr>`)
-    .join('');
+  let html='', lastCat=null, num=0;
+  vocab.filter(v => !q || v.it.toLowerCase().includes(q) || v.gr.toLowerCase().includes(q))
+    .forEach(v => {
+      if (!q && v.cat !== lastCat) {
+        html += `<tr class="cat-sep"><td colspan="4">${v.cat}</td></tr>`;
+        lastCat = v.cat;
+      }
+      num++;
+      html += `<tr><td style="font-size:11px;color:var(--text2);text-align:center;width:32px">${num}</td><td style="font-weight:500">${v.it}</td><td>${v.gr}</td><td><span class="badge">${v.cat}</span></td></tr>`;
+    });
+  document.getElementById('vocab-body').innerHTML = html;
 }
 
 // STATS
@@ -364,25 +650,25 @@ function loadStats() {
   try { return JSON.parse(localStorage.getItem('it_stats')||'{"total":0,"correct":0,"sessions":[]}'); }
   catch(e) { return {total:0,correct:0,sessions:[]}; }
 }
-function saveSession(ok, ko) {
-  if (ok+ko === 0) return;
-  const s = loadStats();
-  s.total += ok+ko; s.correct += ok;
-  s.sessions.unshift({date:new Date().toLocaleDateString('el-GR'), ok, total:ok+ko, pct:Math.round(ok/(ok+ko)*100)});
-  if (s.sessions.length>20) s.sessions.pop();
-  localStorage.setItem('it_stats', JSON.stringify(s));
+function saveSession(ok,ko) {
+  if(ok+ko===0) return;
+  const s=loadStats();
+  s.total+=ok+ko; s.correct+=ok;
+  s.sessions.unshift({date:new Date().toLocaleDateString('el-GR'),ok,total:ok+ko,pct:Math.round(ok/(ok+ko)*100)});
+  if(s.sessions.length>20) s.sessions.pop();
+  localStorage.setItem('it_stats',JSON.stringify(s));
 }
 function renderStats() {
-  const s = loadStats();
-  document.getElementById('st-total').textContent = s.total || '—';
-  document.getElementById('st-pct').textContent = s.total ? Math.round(s.correct/s.total*100)+'%' : '—';
-  document.getElementById('st-sessions').textContent = s.sessions.length;
-  const best = s.sessions.length ? Math.max(...s.sessions.map(x=>x.pct)) : null;
-  document.getElementById('st-best').textContent = best !== null ? best+'%' : '—';
-  const ul = document.getElementById('hist-list');
-  ul.innerHTML = s.sessions.length
-    ? s.sessions.map(x=>`<li><span>${x.ok}/${x.total} σωστά <span class="hist-date">${x.date}</span></span><span class="pct-badge">${x.pct}%</span></li>`).join('')
-    : '<li style="color:var(--text2)">Δεν υπάρχουν ακόμα συνεδρίες.</li>';
+  const s=loadStats();
+  document.getElementById('st-total').textContent=s.total||'—';
+  document.getElementById('st-pct').textContent=s.total?Math.round(s.correct/s.total*100)+'%':'—';
+  document.getElementById('st-sessions').textContent=s.sessions.length;
+  const best=s.sessions.length?Math.max(...s.sessions.map(x=>x.pct)):null;
+  document.getElementById('st-best').textContent=best!==null?best+'%':'—';
+  const ul=document.getElementById('hist-list');
+  ul.innerHTML=s.sessions.length
+    ?s.sessions.map(x=>`<li><span>${x.ok}/${x.total} σωστά <span class="hist-date">${x.date}</span></span><span class="pct-badge">${x.pct}%</span></li>`).join('')
+    :'<li style="color:var(--text2)">Δεν υπάρχουν ακόμα συνεδρίες.</li>';
 }
 function clearStats() {
   if(confirm('Να διαγραφούν τα στατιστικά;')) { localStorage.removeItem('it_stats'); renderStats(); }
@@ -397,10 +683,9 @@ function showPage(p) {
   if(p==='stats') renderStats();
 }
 
-// Init
+buildCatFilter();
 renderQuiz();
 renderVocab();
-
 if('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(()=>{});
 </script>
 </body>
