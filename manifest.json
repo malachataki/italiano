@@ -2,7 +2,7 @@
   "name": "Ιταλικό Λεξιλόγιο",
   "short_name": "Italiano",
   "description": "Εξάσκηση ιταλικού λεξιλογίου με ελληνική μετάφραση",
-  "start_url": "/",
+  "start_url": "/italiano/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#533fb7",
